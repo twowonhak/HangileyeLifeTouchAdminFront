@@ -1,6 +1,7 @@
 import QuestionMain from "../views/pages/questionMain";
 import SpecialNote from "../views/pages/questionMain/patientCase/specialNote";
-import PatientCase from "../views/pages/questionMain/patientCase";
+import PatientCase from "../views/pages/questionMain/patientCase/patient";
+import QuestionExampleCase from "../views/pages/questionMain/questionExampleCase";
 
 const routes = [
   {
@@ -16,7 +17,7 @@ const routes = [
     icon: "ni ni-single-02 text-info",
     views: [
       {
-        path: "/patientCase",
+        path: "/patientCase/patient",
         name: "환자",
         miniName: "P",
         component: <PatientCase />,
@@ -32,11 +33,11 @@ const routes = [
     ],
   },
   {
-    path: "/charts",
+    path: "/questionExampleCase/question",
     name: "질문 케이스",
     icon: "ni ni-books text-green",
-    component: <QuestionMain />,
-    layout: "/questionMain/question",
+    component: <QuestionExampleCase />,
+    layout: "/questionMain",
   },
   {
     path: "/charts",

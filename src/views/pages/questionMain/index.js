@@ -11,7 +11,7 @@ export default function QuestionMain() {
 
   // case open
   const [caseInsertModal, setCaseInsertModal] = useState(false);
-  const [alert, setAlert] = React.useState(null);
+  const [alert, setAlert] = useState(null);
 
   const [menu, setMenu] = useState([
     {name: '생성', fun: ()=>{

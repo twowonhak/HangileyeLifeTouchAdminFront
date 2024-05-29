@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Breadcrumb, BreadcrumbItem, Button, Col, Container, Row,} from "reactstrap";
+import {Link} from "react-router-dom";
 
 function TimelineHeader({name, parentName, menu}) {
   return (
@@ -33,18 +34,15 @@ function TimelineHeader({name, parentName, menu}) {
                   </Breadcrumb>
                 </Col>
                 <Col className="mt-3 mt-md-0 text-md-right" lg="6" xs="5">
-
                   {
-                    menu.map((value, index)=>{
-                      return(
+                    menu.map((value, index) => {
+                      return (
                           <Button key={index} className="btn-neutral" color="default" size="sm" onClick={value.fun}>
                             {value.name}
                           </Button>
                       )
                     })
                   }
-
-
                 </Col>
               </Row>
             </div>

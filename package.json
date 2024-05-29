@@ -33,7 +33,7 @@
     "react-perfect-scrollbar": "1.5.8",
     "react-quill": "2.0.0",
     "react-router": "^6.23.1",
-    "react-router-dom": "^6.21.1",
+    "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "react-select2-wrapper": "1.0.4-beta6",
     "react-to-print": "2.14.15",

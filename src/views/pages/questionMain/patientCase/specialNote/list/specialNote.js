@@ -1,4 +1,4 @@
-import {specialNoteDeleteApi, specialNoteListSelectApi} from "../../../../../api/specialNoteApi";
+import {specialNoteDeleteApi, specialNoteListSelectApi} from "../../../../../../api/specialNoteApi";
 
 export function listSelect(dataList, setDataList) {
   specialNoteListSelectApi().then((res) => {

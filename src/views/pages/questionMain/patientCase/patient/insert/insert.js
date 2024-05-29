@@ -1,10 +1,10 @@
-import {insertApi} from "../../../../../api/patientCaseApi";
-import {diagListApi} from "../../../../../api/common";
-import {specialNoteListSelectApi} from "../../../../../api/specialNoteApi";
+import {insertApi} from "../../../../../../api/patientCaseApi";
+import {diagListApi} from "../../../../../../api/common";
+import {specialNoteListSelectApi} from "../../../../../../api/specialNoteApi";
+import warning from "../../../../components/Alert/SweetAlert/warning";
+import info from "../../../../components/Alert/SweetAlert/info";
 
-export function onSave(e, data, setIsOpen) {
-  e.preventDefault()
-
+export function onSave(data, setIsOpen, setAlert) {
   if (data.useStrDat === '') {
     data.useStrDat = '99999999'
   }
@@ -12,18 +12,14 @@ export function onSave(e, data, setIsOpen) {
     data.useEndDat = '99999999'
   }
 
-  const keys = Object.keys(data);
   let ok = true
 
-  keys.forEach((name) => {
-    if (name !== "partTy" ||
-        name !== "jobTy" ||
-        name !== "specialNote") {
-      if (data.name === '') {
-        ok = false
-      }
-    }
-  })
+  if (data.type === '' ||
+      data.diagCd === '' ||
+      data.sex === '' ||
+      data.birth === '') {
+    ok = false
+  }
 
   if (ok) {
     insertApi(data).then((res) => {
@@ -31,13 +27,14 @@ export function onSave(e, data, setIsOpen) {
         setIsOpen(false)
       } else {
         console.log(res)
-        alert(res.resultMessage)
+        info(setAlert, res.resultMessage)
       }
     }).catch((e) => {
       console.error(e)
     })
-  } else {
-    alert("필수 항목 체크가 필요 합니다.")
+  }
+  else {
+    warning(setAlert, "필수 항목 체크가 필요 합니다.")
   }
 }
 

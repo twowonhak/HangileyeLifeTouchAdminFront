@@ -15,3 +15,7 @@ export const insertApi = async (infoData) => {
 export const deleteApi = async (infoData) => {
   return await customAxios.post("/patientCase/deleteApi", infoData)
 }
+
+export const updateApi = async (infoData) => {
+  return await customAxios.post("/patientCase/updateApi", infoData)
+}
