@@ -1,7 +1,8 @@
 import React, {memo, useState} from "react";
 import {onSave} from "./insert";
-import inputData from "../../../../../../utiles/input/inputData";
+import inputData from "../../../../../../utiles/fun/inputData";
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label} from "reactstrap";
+import {useNavigate} from "react-router-dom";
 
 export default memo(function Insert({setIsOpenMainFun}) {
 
@@ -9,6 +10,7 @@ export default memo(function Insert({setIsOpenMainFun}) {
     content: ""
   })
   const [alert, setAlert] = useState(null);
+  const navigate = useNavigate ();
 
   const onInputData = (e) => {
     inputData(e, data, setData)
@@ -49,9 +51,9 @@ export default memo(function Insert({setIsOpenMainFun}) {
               <Button
                   color="primary"
                   type="button"
-                  onClick={() => onSave(data, setIsOpenMainFun, setAlert)}
+                  onClick={() => onSave(data, setIsOpenMainFun, setAlert, navigate)}
               >
-                생성
+                등록
               </Button>
             </Form>
           </CardBody>

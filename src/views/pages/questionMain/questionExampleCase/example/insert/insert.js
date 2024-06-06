@@ -1,40 +1,21 @@
-import {insertApi} from "../../../../../../api/questionExampleCaseApi";
+import {requestApi} from "../../../../../../api/mainApi";
+import warning from "../../../../components/Alert/SweetAlert/warning";
+import loginWarning from "../../../../components/Alert/SweetAlert/loginWarning";
 
-export function onSave(e, data, setIsOpen) {
-  e.preventDefault()
-
-  if (data.useStrDat === '') {
-    data.useStrDat = '99999999'
-  }
-  if (data.useEndDat === '') {
-    data.useEndDat = '99999999'
-  }
-
-  const keys = Object.keys(data);
-  let ok = true
-
-  keys.forEach((name) => {
-    if (name !== "partTy" ||
-        name !== "jobTy" ||
-        name !== "specialNote") {
-      if (data.name === '') {
-        ok = false
-      }
-    }
-  })
-
-  if (ok) {
-    insertApi(data).then((res) => {
+export function onSave(data, setIsOpen, setIsOpenAlert, navigate) {
+  if (data.content.length === 0) {
+    warning(setIsOpenAlert, "입력 하시지 않은 정보가 있습니다.")
+  } else {
+    requestApi("/example/insertApi",data).then((res) => {
       if (res.resultCode === "0000") {
         setIsOpen(false)
       } else {
-        console.log(res)
+        
         alert(res.resultMessage)
       }
     }).catch((e) => {
       console.error(e)
+    loginWarning(setIsOpenAlert, navigate)
     })
-  } else {
-    alert("필수 항목 체크가 필요 합니다.")
   }
 }

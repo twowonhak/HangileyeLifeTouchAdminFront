@@ -3,17 +3,18 @@ import {useCookies} from "react-cookie";
 import {useNavigate} from "react-router-dom";
 
 // 헤더
-export default memo(function LoggingIn() {
+export default function LoggingIn() {
 
   const [cookies, setCookie, removeCookie] = useCookies();
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(1)
     if (cookies.ID === undefined) {
       alert("로그인 정보가 없거나 혹은 일정 시간이 경과 되었습니다.")
-      navigate('/')
+      navigate('/auth/login')
     }
-  }, [])
+  })
 
 
-})
+}

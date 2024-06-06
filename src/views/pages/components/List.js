@@ -1,15 +1,12 @@
 import {Card, CardHeader} from "reactstrap";
 import BootstrapTable from "react-bootstrap-table-next";
-import React, {useState} from "react";
+import React from "react";
 import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import {paging} from "./pagination";
 
 export default function List({dataList, info, columns, title, contents, setIsOpenDetailFun}) {
-
   const {SearchBar} = Search;
   const pagination = paging()
-
-  const [selected, setSelected] = useState();
 
   const selectRow = {
     mode: 'radio',

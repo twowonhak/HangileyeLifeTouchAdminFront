@@ -23,13 +23,14 @@ function AdminNavbar({theme, sidenavOpen, toggleSidenav}) {
 
   const [cookies, setCookie, removeCookie] = useCookies();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (cookies.ID === undefined) {
-      alert("로그인 정보가 없거나 혹은 일정 시간이 경과 되었습니다.")
-      navigate('/')
-    }
-  }, [])
+  //
+  // useEffect(() => {
+  //   if (cookies.ID === undefined) {
+  //     console.log(1)
+  //     alert("로그인 정보가 없거나 혹은 일정 시간이 경과 되었습니다.")
+  //     navigate('/')
+  //   }
+  // }, [])
 
   // function that on mobile devices makes the search open
   const openSearch = () => {

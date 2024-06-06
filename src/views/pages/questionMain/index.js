@@ -14,7 +14,7 @@ export default function QuestionMain() {
   const [alert, setAlert] = useState(null);
 
   const [menu, setMenu] = useState([
-    {name: '생성', fun: ()=>{
+    {name: '등록', fun: ()=>{
         alertTest()
       }},
   ]);

@@ -1,24 +1,26 @@
 import React, {memo, useEffect, useState} from "react";
 import useDidMountEffect from "../../../../../../hook/useDidMountEffect";
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label} from "reactstrap";
-import inputData from "../../../../../../utiles/input/inputData";
+import inputData from "../../../../../../utiles/fun/inputData";
 import NotificationAlert from "../../../../components/Alert/Modals/Notification";
 import {detail, onDelete} from "./detail";
+import {useNavigate} from "react-router-dom";
 
 export default memo(function Detail({info, setIsOpenMainFun}) {
 
   const [data, setData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isNotificationAlertOpen, setIsNotificationAlertOpen] = useState(null);
+  const navigate = useNavigate ();
 
   useEffect(() => {
-    detail(info, setData)
+    detail(info, setData, setIsOpenAlert, navigate)
   }, [])
 
   useDidMountEffect(() => {
     setIsModalOpen(null)
-  }, [isAlertOpen])
+  }, [isOpenAlert])
 
   const onInputData = (e) => {
     inputData(e, data, setData)
@@ -26,13 +28,13 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
 
   const deleteAlert = () => {
     setIsNotificationAlertOpen(
-        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, setIsOpenMainFun, setIsAlertOpen)}/>
+        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, setIsOpenMainFun, setIsOpenAlert)}/>
     )
   };
 
   return (
       <>
-        {isAlertOpen}
+        {isOpenAlert}
         {isNotificationAlertOpen}
         <Card>
           <CardHeader>
@@ -60,6 +62,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                       name={"content"}
                       onChange={onInputData}
                       defaultValue={data.content}
+                      readOnly={true}
                   />
                 </Col>
               </FormGroup>
@@ -69,7 +72,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                     htmlFor="example-text-input"
                     md="2"
                 >
-                  생성자
+                  등록자
                 </Label>
                 <Col md="10">
                   <Input
@@ -86,7 +89,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                     htmlFor="example-text-input"
                     md="2"
                 >
-                  생성일시
+                  등록일시
                 </Label>
                 <Col md="10">
                   <Input

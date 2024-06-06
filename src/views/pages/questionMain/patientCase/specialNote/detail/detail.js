@@ -1,31 +1,34 @@
 import warning from "../../../../components/Alert/SweetAlert/warning";
-import {specialNoteDeleteApi, specialNoteDetailSelectApi} from "../../../../../../api/specialNoteApi";
 import success from "../../../../components/Alert/SweetAlert/success";
+import {requestApi} from "../../../../../../api/mainApi";
+import loginWarning from "../../../../components/Alert/SweetAlert/loginWarning";
 
-export function detail(data, setData) {
+export function detail(data, setData, setIsOpenAlert, navigate) {
   const infoData = {key: data.current.key}
-  specialNoteDetailSelectApi(infoData).then((res) => {
+  requestApi("/specialNote/detailSelectApi", infoData).then((res) => {
     if (res.resultCode === "0000") {
       setData(res.data)
     } else {
-      console.log(res)
-      alert(res.resultMessage)
+      
+      warning(setIsOpenAlert, res.resultMessage)
     }
   }).catch((e) => {
     console.error(e)
+    loginWarning(setIsOpenAlert, navigate)
   })
 }
 
-export function onDelete(data, setIsOpenMainFun, setIsAlertOpen) {
+export function onDelete(data, setIsOpenMainFun, setIsOpenAlert, navigate) {
   const infoData = {key: data.current.key}
-  specialNoteDeleteApi(infoData).then((res) => {
+  requestApi("/specialNote/deleteApi", infoData).then((res) => {
     if (res.resultCode === "0000") {
-      success(setIsAlertOpen, "삭제 완료 되었습니다.", setIsOpenMainFun)
+      success(setIsOpenAlert, "삭제 완료 되었습니다.", setIsOpenMainFun)
     } else {
-      console.log(res)
-      warning(setIsAlertOpen, res.resultMessage)
+      
+      warning(setIsOpenAlert, res.resultMessage)
     }
   }).catch((e) => {
     console.error(e)
+    loginWarning(setIsOpenAlert, navigate)
   })
 }

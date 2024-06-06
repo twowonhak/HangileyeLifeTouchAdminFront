@@ -4,9 +4,9 @@ export default function success(setAlert, contents, setFun) {
   setAlert(
       <ReactBSAlert
           success
-          style={{ display: "block", marginTop: "-100px" }}
+          style={{display: "block", marginTop: "-100px"}}
           title="성공"
-          onConfirm={setFun}
+          onConfirm={() => setFun === undefined ? setAlert(null) : setFun()}
           onCancel={() => setAlert(null)}
           confirmBtnBsStyle="success"
           confirmBtnText="Ok"

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import {Button, Card, CardBody, Col, Container, Form, FormGroup, Input, InputGroup, Row,} from "reactstrap";
 import {useNavigate} from "react-router-dom";
-import inputData from "../utiles/input/inputData";
+import inputData from "../utiles/fun/inputData";
 import {useCookies} from "react-cookie";
 import AuthHeader from "../components/Headers/AuthHeader";
 import {login} from "./login";
@@ -17,12 +17,12 @@ export default function Login() {
   const navigate = useNavigate();
 
   const [cookies, setCookie, removeCookie] = useCookies();
+  const [isOpenAlert, setIsOpenAlert] = useState(null)
 
   useEffect(()=>{
     Object.keys(cookies).forEach(name => {
-      removeCookie(name, { path: '/auth' });
+      removeCookie(name)
     });
-
   },[])
 
 
@@ -32,6 +32,7 @@ export default function Login() {
 
   return (
       <>
+        {isOpenAlert}
         <AuthHeader
             title="한길 안과 병원"
             lead="병원 내부에서 사용하는 공용 웹 사이트 입니다."
@@ -44,7 +45,7 @@ export default function Login() {
                   <div className="text-center text-muted mb-4">
                     <small>회원 정보는 OCX(이온엠) 계정과 동일 합니다.</small>
                   </div>
-                  <Form role="form" onSubmit={(e) => login(e, loginData, navigate)}>
+                  <Form role="form" onSubmit={(e) => login(e, loginData, navigate, setIsOpenAlert)}>
                     <FormGroup className="mb-3">
                       <InputGroup className="input-group-alternative">
                         <Input

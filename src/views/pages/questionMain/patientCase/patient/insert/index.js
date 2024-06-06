@@ -1,9 +1,10 @@
 import React, {memo, useEffect, useState} from "react";
 import {diagListSelect, onSave, specialNoteListSelect} from "./insert";
-import inputData from "../../../../../../utiles/input/inputData";
-import inputCheck from "../../../../../../utiles/input/inputCheck";
+import inputData from "../../../../../../utiles/fun/inputData";
+import inputCheck from "../../../../../../utiles/fun/inputCheck";
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label} from "reactstrap";
 import {birth, pagtTy, sex, type} from "variables/question/patient";
+import {useNavigate} from "react-router-dom";
 
 export default memo(function Insert({setIsOpenMainFun}) {
 
@@ -23,6 +24,7 @@ export default memo(function Insert({setIsOpenMainFun}) {
   const [diagList, setDiagList] = useState([]);
   const [specialNoteList, setSpecialNoteList] = useState([]);
   const [alert, setAlert] = useState(null);
+  const navigate = useNavigate ();
 
   useEffect(() => {
     // 진료과 조회
@@ -45,9 +47,9 @@ export default memo(function Insert({setIsOpenMainFun}) {
         {alert}
         <Card>
           <CardHeader>
-            <h3 className="mb-0">환자 케이스 생성</h3>
+            <h3 className="mb-0">환자 케이스 등록</h3>
             <p className="text-sm mb-0">
-              생성 하시고자 하는 환자 케이스를 생성 해주세요.
+              등록 하시고자 하는 환자 케이스를 등록 해주세요.
             </p>
           </CardHeader>
           <CardBody>
@@ -212,9 +214,9 @@ export default memo(function Insert({setIsOpenMainFun}) {
               <Button
                   color="primary"
                   type="button"
-                  onClick={()=> onSave(data, setIsOpenMainFun, setAlert)}
+                  onClick={()=> onSave(data, setIsOpenMainFun, setAlert, navigate)}
               >
-                생성
+                등록
               </Button>
             </Form>
           </CardBody>

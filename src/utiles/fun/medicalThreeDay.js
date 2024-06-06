@@ -23,6 +23,7 @@ export default function medicalThreeDay() {
       }
     }).catch((e) => {
       console.error(e)
+    loginWarning(setIsOpenAlert, navigate)
     })
   }
 

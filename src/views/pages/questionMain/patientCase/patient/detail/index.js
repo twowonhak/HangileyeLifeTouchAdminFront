@@ -2,34 +2,36 @@ import React, {memo, useEffect, useState} from "react";
 import useDidMountEffect from "../../../../../../hook/useDidMountEffect";
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label} from "reactstrap";
 import {birth, pagtTy, sex, type} from "../../../../../../variables/question/patient";
-import inputData from "../../../../../../utiles/input/inputData";
-import inputCheck from "../../../../../../utiles/input/inputCheck";
+import inputData from "../../../../../../utiles/fun/inputData";
+import inputCheck from "../../../../../../utiles/fun/inputCheck";
 import {detail, onDelete, onUpdate} from "./detail";
 import NotificationAlert from "../../../../components/Alert/Modals/Notification";
 import {diagListSelect, specialNoteListSelect} from "../insert/insert";
+import {useNavigate} from "react-router-dom";
 
 export default memo(function Detail({info, setIsOpenMainFun}) {
+
 
   const [data, setData] = useState({});
   const [diagList, setDiagList] = useState([]);
   const [specialNoteList, setSpecialNoteList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isNotificationAlertOpen, setIsNotificationAlertOpen] = useState(null);
-
+  const navigate = useNavigate ();
   let checked
 
   useEffect(() => {
-    detail({key: info.current.key}, setData)
+    detail({key: info.current.key}, setData, setIsOpenAlert)
     // 진료과 조회
     diagListSelect(setDiagList)
     // 특이사항 조회
     specialNoteListSelect(setSpecialNoteList)
-  }, [])
+  }, [isOpenAlert])
 
   useDidMountEffect(() => {
     setIsModalOpen(null)
-  }, [isAlertOpen])
+  }, [])
 
   const onInputData = (e) => {
     inputData(e, data, setData)
@@ -41,20 +43,20 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
 
   const deleteAlert = () => {
     setIsNotificationAlertOpen(
-        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, setIsOpenMainFun, setIsAlertOpen)}/>
+        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, setIsOpenMainFun, setIsOpenAlert, navigate)}/>
     )
   };
 
   const updateAlert = (e) => {
     setIsNotificationAlertOpen(
-        <NotificationAlert type={"primary"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"수정"} contents={"해당 정보를 수정 하시겠습니까?"} onClickFun={() => onUpdate(data, setIsAlertOpen, setIsNotificationAlertOpen)}/>
+        <NotificationAlert type={"primary"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"수정"} contents={"해당 정보를 수정 하시겠습니까?"} onClickFun={() => onUpdate(data, setIsOpenAlert, setIsNotificationAlertOpen, navigate)}/>
     )
   };
 
 
   return (
       <>
-        {isAlertOpen}
+        {isOpenAlert}
         {isNotificationAlertOpen}
         <Card>
           <CardHeader>
@@ -71,7 +73,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   <div className="d-flex">
                     {
                       type.map((value, index) => {
-                        if (data.type !== undefined && data.type.includes(value.value)) {
+                        if (data.type !== undefined && data.type === value.value) {
                           checked = true
                         } else checked = false
 
@@ -95,7 +97,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                     {
                       diagList.map((value, index) => {
 
-                        if (data.diagCd !== undefined && data.diagCd.includes(value.diagCd)) {
+                        if (data.diagCd !== undefined && data.diagCd === value.diagCd) {
                           checked = true
                         } else checked = false
 
@@ -118,7 +120,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   <div className="d-flex">
                     {
                       birth.map((value, index) => {
-                        if (data.birth !== undefined && data.birth.includes(value.value)) {
+                        if (data.birth !== undefined && data.birth === value.value) {
                           checked = true
                         } else checked = false
                         return (
@@ -140,7 +142,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   <div className="d-flex">
                     {
                       sex.map((value, index) => {
-                        if (data.sex !== undefined && data.sex.includes(value.value)) {
+                        if (data.sex !== undefined && data.sex === value.value) {
                           checked = true
                         } else checked = false
                         return (
@@ -178,7 +180,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   <div className="d-flex">
                     {
                       pagtTy.map((value, index) => {
-                        if (data.pagtTy !== undefined && data.pagtTy.includes(value.value)) {
+                        if (data.pagtTy !== undefined && data.pagtTy === value.value) {
                           checked = true
                         } else checked = false
                         return (
@@ -207,7 +209,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   <div className="d-flex">
                     {
                       specialNoteList.map((value, index) => {
-                        if (data.specialNote !== null && data.specialNote.includes(value.key)) {
+                        if (data.specialNote !== null && data.specialNote === value.key) {
                           checked = true
                         } else checked = false
                         return (
@@ -269,7 +271,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                     htmlFor="example-text-input"
                     md="1"
                 >
-                  생성자
+                  등록자
                 </Label>
                 <Col md="10">
                   <Input
@@ -286,7 +288,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                     htmlFor="example-text-input"
                     md="1"
                 >
-                  생성일시
+                  등록일시
                 </Label>
                 <Col md="10">
                   <Input

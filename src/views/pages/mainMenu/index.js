@@ -17,7 +17,7 @@ export default function MainMenu() {
               <Card className="bg-secondary shadow border-0">
                 <CardBody className="px-lg-5 py-lg-5">
                   <div className="text-center text-muted mb-4">
-                    <small>권한 필요 시 전산팀에 하이웍스로 문의 해주세요.</small>
+                    <small>권한 필요 시 전산요청 사항을 작성 해주세요.</small>
                   </div>
                   <Link to="/questionMain">
                     <Button block color="primary" size="lg" type="button">

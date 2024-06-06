@@ -20,7 +20,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <BrowserRouter>
-    {/*<LoggingIn/>*/}
     <Routes>
       <Route path="*" element={<Navigate to="/auth/login" replace />} />
       <Route path="/auth/*" element={<AuthLayout />} />
