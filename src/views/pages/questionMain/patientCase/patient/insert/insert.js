@@ -1,10 +1,9 @@
 import warning from "../../../../components/Alert/SweetAlert/warning";
 import info from "../../../../components/Alert/SweetAlert/info";
 import {requestApi} from "../../../../../../api/mainApi";
-import loginWarning from "../../../../components/Alert/SweetAlert/loginWarning";
 import {diagListApi} from "../../../../../../api/common";
 
-export function onSave(data, setIsOpen, setIsOpenAlert, navigate) {
+export function onSave(data, setIsOpen, setIsOpenAlert) {
   if (data.useStrDat === '') {
     data.useStrDat = '99999999'
   }
@@ -22,19 +21,16 @@ export function onSave(data, setIsOpen, setIsOpenAlert, navigate) {
   }
 
   if (ok) {
-    requestApi("/patientCase/insertApi",data).then((res) => {
+    requestApi("/patientCase/insertApi", data).then((res) => {
       if (res.resultCode === "0000") {
         setIsOpen()
       } else {
-        
         info(setIsOpenAlert, res.resultMessage)
       }
     }).catch((e) => {
       console.error(e)
-    loginWarning(setIsOpenAlert, navigate)
     })
-  }
-  else {
+  } else {
     warning(setIsOpenAlert, "필수 항목 체크가 필요 합니다.")
   }
 }
@@ -45,7 +41,6 @@ export function diagListSelect(setDiagList) {
     if (res.resultCode === "0000") {
       setDiagList(res.data)
     } else {
-      
       alert(res.resultMessage)
     }
   }).catch((e) => {
@@ -59,7 +54,6 @@ export function specialNoteListSelect(setSpecialNoteList) {
     if (res.resultCode === "0000") {
       setSpecialNoteList(res.data)
     } else {
-      
       alert(res.resultMessage)
     }
   }).catch((e) => {

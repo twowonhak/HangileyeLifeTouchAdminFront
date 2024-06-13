@@ -1,18 +1,34 @@
-import {Card, CardHeader} from "reactstrap";
+import {Button, Card, CardHeader} from "reactstrap";
 import BootstrapTable from "react-bootstrap-table-next";
-import React from "react";
+import React, {useState} from "react";
 import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import {paging} from "./pagination";
 
-export default function List({dataList, info, columns, title, contents, setIsOpenDetailFun}) {
+export default function List({dataList, type, info, insertFun, setCheckData, columns, title, contents, setIsOpenDetailFun}) {
   const {SearchBar} = Search;
   const pagination = paging()
+  const [check, setCheck] = useState([])
 
   const selectRow = {
-    mode: 'radio',
+    mode: type,
     clickToSelect: true,
-    bgColor: '#c8e6c9',
+    bgColor: '#fbffdd',
     hideSelectColumn: true,
+    onSelect: (row, isSelected, e) => {
+      if (type === "checkbox") {
+        let arr = check
+        if (isSelected) {
+          setCheck([...check, row.key])
+        } else {
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === row.key) {
+              arr.splice(i, 1)
+            }
+          }
+          setCheck(arr)
+        }
+      }
+    }
   };
 
   const rowEvents = {
@@ -27,9 +43,16 @@ export default function List({dataList, info, columns, title, contents, setIsOpe
         <Card>
           <CardHeader>
             <h3 className="mb-0">{title}</h3>
-            <p className="text-sm mb-0">
-              {contents}
-            </p>
+            <div className="d-flex justify-content-between">
+              <p className="text-sm mb-0">
+                {contents}
+              </p>
+              {
+                type === "checkbox"
+                    ? <Button className={"btn btn-success btn-sm"} onClick={()=>insertFun(check)}>등록</Button>
+                    : null
+              }
+            </div>
           </CardHeader>
           <ToolkitProvider
               data={dataList}

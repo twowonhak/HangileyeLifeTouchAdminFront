@@ -8,6 +8,8 @@ import {detail, onDelete, onUpdate} from "./detail";
 import NotificationAlert from "../../../../components/Alert/Modals/Notification";
 import {diagListSelect, specialNoteListSelect} from "../insert/insert";
 import {useNavigate} from "react-router-dom";
+import checked from "../../../../../../utiles/fun/defChecked";
+import defChecked from "../../../../../../utiles/fun/defChecked";
 
 export default memo(function Detail({info, setIsOpenMainFun}) {
 
@@ -18,7 +20,6 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isNotificationAlertOpen, setIsNotificationAlertOpen] = useState(null);
-  const navigate = useNavigate ();
   let checked
 
   useEffect(() => {
@@ -43,13 +44,13 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
 
   const deleteAlert = () => {
     setIsNotificationAlertOpen(
-        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, setIsOpenMainFun, setIsOpenAlert, navigate)}/>
+        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, setIsOpenMainFun, setIsOpenAlert)}/>
     )
   };
 
   const updateAlert = (e) => {
     setIsNotificationAlertOpen(
-        <NotificationAlert type={"primary"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"수정"} contents={"해당 정보를 수정 하시겠습니까?"} onClickFun={() => onUpdate(data, setIsOpenAlert, setIsNotificationAlertOpen, navigate)}/>
+        <NotificationAlert type={"primary"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"수정"} contents={"해당 정보를 수정 하시겠습니까?"} onClickFun={() => onUpdate(data, setIsOpenAlert, setIsNotificationAlertOpen)}/>
     )
   };
 
@@ -73,10 +74,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   <div className="d-flex">
                     {
                       type.map((value, index) => {
-                        if (data.type !== undefined && data.type === value.value) {
-                          checked = true
-                        } else checked = false
-
+                        checked = defChecked(data.type, value.value)
                         return (
                             <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
                               <Input className="custom-control-input" checked={checked} id={value.name + index}
@@ -91,16 +89,13 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                 </Col>
               </FormGroup>
               <FormGroup className="row">
-                <Label className="form-control-label" htmlFor="example-text-input" md="1">진료 타입</Label>
+                <Label className="form-control-label" htmlFor="example-text-input" md="1">진료과</Label>
                 <Col md="10">
                   <div className="d-flex">
                     {
                       diagList.map((value, index) => {
-
-                        if (data.diagCd !== undefined && data.diagCd === value.diagCd) {
-                          checked = true
-                        } else checked = false
-
+                        console.log(value)
+                        checked = defChecked(data.diagCd, value.diagCd)
                         return (
                             <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
                               <Input className="custom-control-input" checked={checked} id={"diagCd" + index}
@@ -120,9 +115,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   <div className="d-flex">
                     {
                       birth.map((value, index) => {
-                        if (data.birth !== undefined && data.birth === value.value) {
-                          checked = true
-                        } else checked = false
+                        checked = defChecked(data.birth, value.value)
                         return (
                             <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
                               <Input className="custom-control-input" checked={checked} id={value.name + index}
@@ -142,14 +135,12 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   <div className="d-flex">
                     {
                       sex.map((value, index) => {
-                        if (data.sex !== undefined && data.sex === value.value) {
-                          checked = true
-                        } else checked = false
+                        checked = defChecked(data.sex, value.value)
                         return (
                             <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
                               <Input className="custom-control-input" checked={checked} id={value.name + index}
                                      type="checkbox" disabled={true}
-                                     name={value.name} value={value.value} onChange={handleChange}/>
+                                     name={value.name} value={value.value}/>
                               <Label className="custom-control-label" htmlFor={value.name + index}>{value.title}</Label>
                             </div>
                         )
@@ -180,9 +171,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   <div className="d-flex">
                     {
                       pagtTy.map((value, index) => {
-                        if (data.pagtTy !== undefined && data.pagtTy === value.value) {
-                          checked = true
-                        } else checked = false
+                        checked = defChecked(data.pagtTy, value.value)
                         return (
                             <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
                               <Input className="custom-control-input" checked={checked} id={value.name + index}
@@ -197,21 +186,12 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                 </Col>
               </FormGroup>
               <FormGroup className="row">
-                <Label className="form-control-label" htmlFor="example-text-input" md="1">직업타입</Label>
-                <Col md="10">
-                  <div className="d-flex">
-                  </div>
-                </Col>
-              </FormGroup>
-              <FormGroup className="row">
                 <Label className="form-control-label" htmlFor="example-text-input" md="1">특이사항</Label>
                 <Col md="10">
                   <div className="d-flex">
                     {
                       specialNoteList.map((value, index) => {
-                        if (data.specialNote !== null && data.specialNote === value.key) {
-                          checked = true
-                        } else checked = false
+                        checked = defChecked(data.specialNote, value.value)
                         return (
                             <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
                               <Input className="custom-control-input" checked={checked} id={"specialNote" + index}

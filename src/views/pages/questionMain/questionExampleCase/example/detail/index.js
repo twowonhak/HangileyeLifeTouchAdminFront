@@ -11,7 +11,6 @@ export default memo(function ExampleDetail({info, setIsOpenListFun}) {
     type:''
   })
   const [isOpenAlert, setIsOpenAlert] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     detail(info, setData, setIsOpenAlert)
@@ -19,7 +18,7 @@ export default memo(function ExampleDetail({info, setIsOpenListFun}) {
 
   const deleteAlert = () => {
     setIsOpenAlert(
-        <NotificationAlert type={"danger"} setIsModalOpen={setIsOpenAlert} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(data, setIsOpenAlert, navigate, setIsOpenListFun)}/>
+        <NotificationAlert type={"danger"} setIsModalOpen={setIsOpenAlert} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(data, setIsOpenAlert, setIsOpenListFun)}/>
     )
   };
 
@@ -95,7 +94,7 @@ export default memo(function ExampleDetail({info, setIsOpenListFun}) {
                         className="custom-control-label"
                         htmlFor="customRadioT"
                     >
-                      프리 텍스트
+                      텍스트
                     </label>
                   </div>
                 </Col>

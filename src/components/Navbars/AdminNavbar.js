@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 // nodejs library that concatenates classes
 import classnames from "classnames";
 // nodejs library to set properties for components
@@ -18,19 +18,19 @@ import {
 } from "reactstrap";
 import {useCookies} from "react-cookie";
 import {Link, useNavigate} from "react-router-dom";
+import loginWarning from "../../views/pages/components/Alert/SweetAlert/loginWarning";
 
 function AdminNavbar({theme, sidenavOpen, toggleSidenav}) {
 
+  const [alert, setAlert] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies();
   const navigate = useNavigate();
   //
-  // useEffect(() => {
-  //   if (cookies.ID === undefined) {
-  //     console.log(1)
-  //     alert("로그인 정보가 없거나 혹은 일정 시간이 경과 되었습니다.")
-  //     navigate('/')
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (cookies.ID === undefined) {
+      loginWarning(setAlert, navigate)
+    }
+  }, [cookies])
 
   // function that on mobile devices makes the search open
   const openSearch = () => {
@@ -63,6 +63,7 @@ function AdminNavbar({theme, sidenavOpen, toggleSidenav}) {
 
   return (
       <>
+        {alert}
         <Navbar
             className={classnames(
                 "navbar-top navbar-expand border-bottom",
@@ -94,12 +95,12 @@ function AdminNavbar({theme, sidenavOpen, toggleSidenav}) {
                 <UncontrolledDropdown nav>
                   <DropdownToggle className="nav-link pr-0" color="" tag="a">
                     <Media className="align-items-center">
-                    <span className="avatar avatar-sm rounded-circle">
-                      <img
-                          alt="..."
-                          src={require("assets/img/theme/icons8-male-user-96.jpg")}
-                      />
-                    </span>
+                    {/*<span className="avatar avatar-sm rounded-circle">*/}
+                    {/*  <img*/}
+                    {/*      alt="..."*/}
+                    {/*      src={require("assets/img/theme/icons8-male-user-96.jpg")}*/}
+                    {/*  />*/}
+                    {/*</span>*/}
                       <Media className="ml-2 d-none d-lg-block">
                       <span className="mb-0 text-sm font-weight-bold">
                        {cookies.NAME} 님 반갑습니다.

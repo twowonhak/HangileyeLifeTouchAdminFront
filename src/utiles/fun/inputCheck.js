@@ -9,15 +9,24 @@ export default function inputCheck(e, data, setData) {
 
   let {name, value} = e.currentTarget;
   let res
+  let arr // 문자열을 '/' 기준으로 분리하여 배열로 만듭니다
+  let index
+
   if (e.currentTarget.checked) {
     res = data[name].replaceAll(value, '')
     res = res.replaceAll('//', '');
     res = res + '/' + value
     res = removeFirstCharIfMatch(res, '/')
+    arr = res.split('/');
+    arr.sort();
+    res = arr.join('/');
   } else {
-    res = data[name].replaceAll(value, '')
-    res = res.replaceAll('//', '');
-    res = removeFirstCharIfMatch(res, '/')
+    arr = data[name].split('/');
+    index = arr.indexOf(value)
+    if (index !== -1) {
+      arr.splice(index, 1);
+    }
+    res = arr.join('/');
   }
 
   setData({

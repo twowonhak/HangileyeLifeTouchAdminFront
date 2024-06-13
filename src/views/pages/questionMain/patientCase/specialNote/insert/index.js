@@ -10,7 +10,6 @@ export default memo(function Insert({setIsOpenMainFun}) {
     content: ""
   })
   const [alert, setAlert] = useState(null);
-  const navigate = useNavigate ();
 
   const onInputData = (e) => {
     inputData(e, data, setData)
@@ -51,7 +50,7 @@ export default memo(function Insert({setIsOpenMainFun}) {
               <Button
                   color="primary"
                   type="button"
-                  onClick={() => onSave(data, setIsOpenMainFun, setAlert, navigate)}
+                  onClick={() => onSave(data, setIsOpenMainFun, setAlert)}
               >
                 등록
               </Button>

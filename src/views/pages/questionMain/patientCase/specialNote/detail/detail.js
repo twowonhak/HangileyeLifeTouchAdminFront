@@ -3,7 +3,7 @@ import success from "../../../../components/Alert/SweetAlert/success";
 import {requestApi} from "../../../../../../api/mainApi";
 import loginWarning from "../../../../components/Alert/SweetAlert/loginWarning";
 
-export function detail(data, setData, setIsOpenAlert, navigate) {
+export function detail(data, setData, setIsOpenAlert) {
   const infoData = {key: data.current.key}
   requestApi("/specialNote/detailSelectApi", infoData).then((res) => {
     if (res.resultCode === "0000") {
@@ -14,11 +14,10 @@ export function detail(data, setData, setIsOpenAlert, navigate) {
     }
   }).catch((e) => {
     console.error(e)
-    loginWarning(setIsOpenAlert, navigate)
   })
 }
 
-export function onDelete(data, setIsOpenMainFun, setIsOpenAlert, navigate) {
+export function onDelete(data, setIsOpenMainFun, setIsOpenAlert) {
   const infoData = {key: data.current.key}
   requestApi("/specialNote/deleteApi", infoData).then((res) => {
     if (res.resultCode === "0000") {
@@ -29,6 +28,5 @@ export function onDelete(data, setIsOpenMainFun, setIsOpenAlert, navigate) {
     }
   }).catch((e) => {
     console.error(e)
-    loginWarning(setIsOpenAlert, navigate)
   })
 }

@@ -1,13 +1,10 @@
-import React, {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import listSelect from "./list";
-import SimpleHeader from "../../../../../../components/Headers/SimpleHeader";
+import SimpleHeader from "../../../../../components/Headers/SimpleHeader";
 import {Container, Row} from "reactstrap";
-import QuestionInsert from "../insert";
-import List from "../../../../components/List";
-import ExampleList from "../../example/list_questionDetail";
+import List from "reactstrap/es/List";
 
-
-export default function QuestionList() {
+export default function ResponseList() {
 
   const info = useRef('')
   const [searchDate, setSearchDate] = useState({useDate: ""})
@@ -35,7 +32,6 @@ export default function QuestionList() {
       }
     },
   ]
-
   const columns = [
     {
       dataField: "key",
@@ -85,13 +81,9 @@ export default function QuestionList() {
           <Row>
             <div className="col">
               {isOpenMain ?
-                  <List dataList={dataList} type={'radio'} info={info} columns={columns} title={"질문 정보"}
+                  <List dataList={dataList} info={info} columns={columns} title={"질문 정보"}
                         contents={"등록된 질문 정보 입니다."}
                         setIsOpenDetailFun={setIsOpenDetailFun}/> : null}
-              {isOpenQuestionInsert ?
-                  <QuestionInsert setIsOpenMainFun={setIsOpenMainFun}/> : null}
-              {isOpenDetail ?
-                  <ExampleList queInfo={info.current} setIsOpenMainFun={setIsOpenMainFun}/> : null}
             </div>
           </Row>
         </Container>

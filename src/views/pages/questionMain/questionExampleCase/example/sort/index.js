@@ -41,9 +41,11 @@ export default memo(function SortUpdate({dataKey}) {
     </>);
   }
 
-  const columns = [  {dataField: 'content', text: '보기 내용'},
+  const columns = [
+    {dataField: 'content', text: '보기 내용'},
     {dataField: 'type', text: '보기 타입'},
-    {dataField: 'sortChange', text: '순서변경', formatter: actionFormatter, headerStyle: {width: '200px'}}]
+    {dataField: 'sortChange', text: '순서변경', formatter: actionFormatter, headerStyle: {width: '200px'}}
+  ]
 
 
   const sortUpdate = () => {

@@ -4,7 +4,6 @@ import inputData from "../../../../../../utiles/fun/inputData";
 import inputCheck from "../../../../../../utiles/fun/inputCheck";
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label} from "reactstrap";
 import {birth, pagtTy, sex, type} from "variables/question/patient";
-import {useNavigate} from "react-router-dom";
 
 export default memo(function Insert({setIsOpenMainFun}) {
 
@@ -14,7 +13,6 @@ export default memo(function Insert({setIsOpenMainFun}) {
     sex: "",
     birth: "",
     preYn: "",
-    jobTy: "",
     pagtTy: "",
     specialNote: "",
     useStrDat: "",
@@ -24,7 +22,6 @@ export default memo(function Insert({setIsOpenMainFun}) {
   const [diagList, setDiagList] = useState([]);
   const [specialNoteList, setSpecialNoteList] = useState([]);
   const [alert, setAlert] = useState(null);
-  const navigate = useNavigate ();
 
   useEffect(() => {
     // 진료과 조회
@@ -40,7 +37,6 @@ export default memo(function Insert({setIsOpenMainFun}) {
   const handleChange = (e) => {
     inputCheck(e, data, setData)
   };
-
 
   return (
       <>
@@ -72,7 +68,7 @@ export default memo(function Insert({setIsOpenMainFun}) {
                 </Col>
               </FormGroup>
               <FormGroup className="row">
-                <Label className="form-control-label" htmlFor="example-text-input" md="1">진료 타입</Label>
+                <Label className="form-control-label" htmlFor="example-text-input" md="1">진료과</Label>
                 <Col md="10">
                   <div className="d-flex">
                     {
@@ -151,13 +147,6 @@ export default memo(function Insert({setIsOpenMainFun}) {
                 </Col>
               </FormGroup>
               <FormGroup className="row">
-                <Label className="form-control-label" htmlFor="example-text-input" md="1">직업타입</Label>
-                <Col md="10">
-                  <div className="d-flex">
-                  </div>
-                </Col>
-              </FormGroup>
-              <FormGroup className="row">
                 <Label className="form-control-label" htmlFor="example-text-input" md="1">특이사항</Label>
                 <Col md="10">
                   <div className="d-flex">
@@ -214,7 +203,7 @@ export default memo(function Insert({setIsOpenMainFun}) {
               <Button
                   color="primary"
                   type="button"
-                  onClick={()=> onSave(data, setIsOpenMainFun, setAlert, navigate)}
+                  onClick={()=> onSave(data, setIsOpenMainFun, setAlert)}
               >
                 등록
               </Button>

@@ -12,10 +12,9 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isNotificationAlertOpen, setIsNotificationAlertOpen] = useState(null);
-  const navigate = useNavigate ();
 
   useEffect(() => {
-    detail(info, setData, setIsOpenAlert, navigate)
+    detail(info, setData, setIsOpenAlert)
   }, [])
 
   useDidMountEffect(() => {

@@ -3,7 +3,7 @@ import customAxios from "../lib/customAxios";
 /*
     *  목록 : listSelectApi
     *  상세 : detailSelectApi
-    *  생성 : insertApi
+    *  등록 : insertApi
     *  수정 : updateApi
     *  삭제 : deleteApi
 * */

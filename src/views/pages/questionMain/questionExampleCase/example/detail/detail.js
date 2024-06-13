@@ -8,7 +8,6 @@ export function detail(queInfo, setData, setIsOpenAlert) {
     if (res.resultCode === "0000") {
       setData(res.data)
     } else {
-
       warning(setIsOpenAlert, res.resultMessage)
     }
   }).catch((e) => {
@@ -16,7 +15,7 @@ export function detail(queInfo, setData, setIsOpenAlert) {
   })
 }
 
-export function onDelete(data, setIsOpenAlert, navigate, setIsOpenListFun) {
+export function onDelete(data, setIsOpenAlert, setIsOpenListFun) {
   requestApi("/example/deleteApi", data).then((res) => {
     if (res.resultCode === "0000") {
       success(setIsOpenAlert, "삭제 완료 되었습니다.", setIsOpenListFun)
@@ -25,11 +24,10 @@ export function onDelete(data, setIsOpenAlert, navigate, setIsOpenListFun) {
     }
   }).catch((e) => {
     console.error(e)
-    loginWarning(setIsOpenAlert, navigate)
   })
 }
 
-export function onUpdate(data, setIsOpenAlert, navigate, setIsOpenListFun) {
+export function onUpdate(data, setIsOpenAlert, setIsOpenListFun) {
   requestApi("/example/updateApi", data).then((res) => {
     if (res.resultCode === "0000") {
       success(setIsOpenAlert, "수정 완료 되었습니다.", setIsOpenListFun)
@@ -38,6 +36,5 @@ export function onUpdate(data, setIsOpenAlert, navigate, setIsOpenListFun) {
     }
   }).catch((e) => {
     console.error(e)
-    loginWarning(setIsOpenAlert, navigate)
   })
 }

@@ -1,12 +1,38 @@
-import {memo} from "react";
+import React, {useRef, useState} from "react";
+import Search from "./search"
+import CaseList from "./list";
 
-export default memo(function CaseInsert({isOpen, setIsOpen}) {
-  if (!isOpen)
-    return null;
-  else
-    return (
-        <>
-          <button onClick={()=>{setIsOpen(false)}}>창닫기</button>
-        </>
-    )
-})
+export default function Case() {
+
+  const patInfo = useRef('')
+  const [isOpenSearch, setIsOpenSearch] = useState(true);
+  const [isOpenList, setIsOpenList] = useState(false);
+
+  const [isOpenAlert, setIsOpenAlert] = useState(null);
+
+  function setIsOpenSearchFun() {
+    setIsOpenSearch(true)
+    setIsOpenList(false)
+  }
+
+  function setIsOpenListFun() {
+    setIsOpenSearch(false)
+    setIsOpenList(true)
+  }
+
+  return (
+      <>
+        {isOpenAlert}
+        {
+          isOpenSearch
+              ? <Search patInfo={patInfo} onOpenFun={setIsOpenListFun} setIsOpenAlert={setIsOpenAlert}/>
+              : null
+        }
+        {
+          isOpenList
+              ? <CaseList patInfo={patInfo} onOpenFun={setIsOpenSearchFun} setIsOpenAlert={setIsOpenAlert}/>
+              : null
+        }
+      </>
+  )
+}

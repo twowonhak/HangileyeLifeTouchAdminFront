@@ -3,7 +3,7 @@ import info from "../../../../components/Alert/SweetAlert/info";
 import {requestApi} from "../../../../../../api/mainApi";
 import loginWarning from "../../../../components/Alert/SweetAlert/loginWarning";
 
-export function onSave(data, setIsOpen, setIsOpenAlert, navigate) {
+export function onSave(data, setIsOpen, setIsOpenAlert) {
 
   if (data.useStrDat === '') {
     data.useStrDat = '99999999'
@@ -23,7 +23,6 @@ export function onSave(data, setIsOpen, setIsOpenAlert, navigate) {
       }
     }).catch((e) => {
       console.error(e)
-    loginWarning(setIsOpenAlert, navigate)
     })
   }
 }

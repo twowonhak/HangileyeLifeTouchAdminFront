@@ -1,14 +1,15 @@
-import QuestionMain from "../views/pages/questionMain";
 import SpecialNote from "../views/pages/questionMain/patientCase/specialNote/list";
 import PatientCase from "../views/pages/questionMain/patientCase/patient/list";
 import QuestionList from "../views/pages/questionMain/questionExampleCase/question/list";
+import ResponseList from "../views/pages/questionMain/response/list";
+import Case from "../views/pages/questionMain/case";
 
 const routes = [
   {
     path: "/case",
     name: "케이스",
     icon: "ni ni-archive-2 text-red",
-    component: <QuestionMain />,
+    component: <Case />,
     layout: "/questionMain",
   },
   {
@@ -43,7 +44,7 @@ const routes = [
     path: "/charts",
     name: "환자 답변 조회",
     icon: "ni ni-notification-70 text-pink",
-    component: <QuestionMain />,
+    component: <ResponseList />,
     layout: "/questionMain",
   },
 ];

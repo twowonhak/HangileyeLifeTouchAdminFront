@@ -24,7 +24,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isNotificationAlertOpen, setIsNotificationAlertOpen] = useState(null);
 
-  const columns = useRef([
+  const columns = [
     {
       dataField: "key",
       text: "KEY",
@@ -40,8 +40,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
       text: "보기 타입",
       sort: true,
     },
-  ]);
-  const navigate = useNavigate();
+  ]
 
   useEffect(() => {
     detail(queInfo, setData, setIsOpenAlert)
@@ -61,7 +60,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
     setIsOpenSortUpdate(false)
   }
 
-  // 보기 생성
+  // 보기 등록
   const setIsOpenInsertFun = () => {
     setIsOpenExampleListMain(false)
     setIsOpenInsert(true)
@@ -94,7 +93,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
     setIsNotificationAlertOpen(
         <NotificationAlert type={"danger"} setIsModalOpen={setIsNotificationAlertOpen}
                            title={"삭제"} contents={`해당 정보를 삭제 하시겠습니까?\n삭제 시 해당 보기에 내용도 함께 삭제 됩니다.`}
-                           onClickFun={() => onDelete(data, setIsOpenMainFun, setIsOpenAlert, navigate)}/>
+                           onClickFun={() => onDelete(data, setIsOpenMainFun, setIsOpenAlert)}/>
     )
   };
 
@@ -102,7 +101,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
     setIsNotificationAlertOpen(
         <NotificationAlert type={"primary"} setIsModalOpen={setIsNotificationAlertOpen}
                            title={"수정"} contents={"해당 정보를 수정 하시겠습니까?"}
-                           onClickFun={() => onUpdate(data, setIsOpenAlert, setIsNotificationAlertOpen, navigate)}/>
+                           onClickFun={() => onUpdate(data, setIsOpenAlert, setIsNotificationAlertOpen)}/>
     )
   };
 
@@ -289,7 +288,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
           <div className="col">
             {
               isOpenExampleListMain ?
-                  <List dataList={dataList} info={info} columns={columns.current} title={"보기"}
+                  <List dataList={dataList} type={'radio'} info={info} columns={columns} title={"보기"}
                         contents={"위 질문에 포함 된 보기 입니다."}
                         setIsOpenDetailFun={setIsOpenDetailFun}/> : null
             }

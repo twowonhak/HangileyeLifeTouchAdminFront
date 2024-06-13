@@ -14,7 +14,6 @@ export default memo(function ExampleInsert({setIsOpenListFun,queKey}) {
   })
 
   const [alert, setAlert] = useState(null);
-  const navigate = useNavigate ();
 
   const onInputData = (e) => {
     inputData(e, data, setData)
@@ -27,7 +26,7 @@ export default memo(function ExampleInsert({setIsOpenListFun,queKey}) {
           <CardHeader>
             <h3 className="mb-0">보기 등록</h3>
             <p className="text-sm mb-0">
-              위 질문에 해당 되는 보기를 생성 해주세요.
+              위 질문에 해당 되는 보기를 등록 해주세요.
             </p>
           </CardHeader>
           <CardBody>
@@ -90,7 +89,7 @@ export default memo(function ExampleInsert({setIsOpenListFun,queKey}) {
                         className="custom-control-label"
                         htmlFor="customRadioT"
                     >
-                      프리 텍스트
+                      텍스트
                     </label>
                   </div>
                 </Col>
@@ -98,7 +97,7 @@ export default memo(function ExampleInsert({setIsOpenListFun,queKey}) {
               <Button
                   color="primary"
                   type="button"
-                  onClick={() => onSave(data, setIsOpenListFun, setAlert, navigate)}
+                  onClick={() => onSave(data, setIsOpenListFun, setAlert)}
               >
                 등록
               </Button>

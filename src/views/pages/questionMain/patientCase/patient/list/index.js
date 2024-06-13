@@ -9,13 +9,12 @@ import List from "../../../../components/List";
 export default function PatientCase() {
 
   const info = useRef('')
-  const [searchDate, setSearchDate] = useState({useDate: ""})
   const [dataList, setDataList] = useState([])
   const [isOpenMain, setIsOpenMain] = useState(true);
   const [isOpenInsert, setIsOpenInsert] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(null);
-  const [menu, setMenu] = useState([
+  const menu = [
     {
       name: '메인', fun: () => {
         setIsOpenMain(true)
@@ -30,8 +29,8 @@ export default function PatientCase() {
         setIsOpenDetail(false)
       }
     },
-  ]);
-  const columns = useRef([
+  ]
+  const columns = [
     {
       dataField: "key",
       text: "KEY",
@@ -58,11 +57,6 @@ export default function PatientCase() {
       sort: true,
     },
     {
-      dataField: "jobTy",
-      text: "직업",
-      sort: true,
-    },
-    {
       dataField: "pagtTy",
       text: "과거력",
       sort: true,
@@ -72,11 +66,11 @@ export default function PatientCase() {
       text: "특이사항",
       sort: true,
     },
-  ]);
+  ]
 
   useEffect(() => {
     if (!isOpenInsert && !isOpenDetail) {
-      listSelect(setDataList, searchDate)
+      listSelect(setDataList)
     }
   }, [isOpenMain])
 
@@ -99,7 +93,7 @@ export default function PatientCase() {
           <Row>
             <div className="col">
               {isOpenMain ?
-                  <List dataList={dataList} info={info} columns={columns.current} title={"환자정보"} contents={"등록된 환자 정보 입니다."}
+                  <List dataList={dataList} type={'radio'} info={info} columns={columns} title={"환자정보"} contents={"등록된 환자 정보 입니다."}
                         setIsOpenDetailFun={setIsOpenDetailFun}/> : null}
               {isOpenInsert ?
                   <Insert setIsOpenMainFun={setIsOpenMainFun}/> : null}
