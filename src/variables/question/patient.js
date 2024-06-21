@@ -98,6 +98,11 @@ const pagtTy = [
     name: "pagtTy",
     value: "6",
   },
+  {
+    title: "기타",
+    name: "pagtTy",
+    value: "7",
+  },
 ]
 
 export {type, birth, sex, pagtTy};

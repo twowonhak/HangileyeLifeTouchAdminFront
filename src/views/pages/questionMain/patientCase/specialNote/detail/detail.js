@@ -9,7 +9,6 @@ export function detail(data, setData, setIsOpenAlert) {
     if (res.resultCode === "0000") {
       setData(res.data)
     } else {
-      
       warning(setIsOpenAlert, res.resultMessage)
     }
   }).catch((e) => {
@@ -23,7 +22,6 @@ export function onDelete(data, setIsOpenMainFun, setIsOpenAlert) {
     if (res.resultCode === "0000") {
       success(setIsOpenAlert, "삭제 완료 되었습니다.", setIsOpenMainFun)
     } else {
-      
       warning(setIsOpenAlert, res.resultMessage)
     }
   }).catch((e) => {

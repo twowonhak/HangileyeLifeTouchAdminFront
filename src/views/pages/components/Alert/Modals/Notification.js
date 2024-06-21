@@ -55,7 +55,10 @@ export default function NotificationAlert({type, setIsModalOpen, title, contents
                   className="btn-white"
                   color="default"
                   type="button"
-                  onClick={onClickFun}
+                  onClick={()=>{
+                    setIsModalOpen(false)
+                    onClickFun()
+                  }}
               >
                 계속 진행
               </Button>

@@ -83,7 +83,7 @@ export default memo(function QuestionInsert({setIsOpenMainFun}) {
                   />
                 </Col>
                 <div className="custom-control ml-7">
-                  적용기간 미 선택 시 적용기간 상관 없음
+                  적용기간 삭제 시 적용기간 상관 없음
                 </div>
               </FormGroup>
               <Button

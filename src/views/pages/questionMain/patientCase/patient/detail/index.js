@@ -7,14 +7,27 @@ import inputCheck from "../../../../../../utiles/fun/inputCheck";
 import {detail, onDelete, onUpdate} from "./detail";
 import NotificationAlert from "../../../../components/Alert/Modals/Notification";
 import {diagListSelect, specialNoteListSelect} from "../insert/insert";
-import {useNavigate} from "react-router-dom";
-import checked from "../../../../../../utiles/fun/defChecked";
 import defChecked from "../../../../../../utiles/fun/defChecked";
 
 export default memo(function Detail({info, setIsOpenMainFun}) {
 
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    type:'',
+    diagCd:'',
+    birth:'',
+    preYn:'',
+    sex:'',
+    pagtTy:'',
+    tyspecialNotepe:'',
+    specialNote:'',
+    useStrDat:'',
+    useEndDat:'',
+    crUserId:'',
+    crDtime:'',
+    upUserId:'',
+    upDtime:'',
+  });
   const [diagList, setDiagList] = useState([]);
   const [specialNoteList, setSpecialNoteList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +36,8 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
   let checked
 
   useEffect(() => {
-    detail({key: info.current.key}, setData, setIsOpenAlert)
+    let reqData = {key : (info.current.key ? info.current.key : info.current)}
+    detail(reqData, setData, setIsOpenAlert)
     // 진료과 조회
     diagListSelect(setDiagList)
     // 특이사항 조회
@@ -63,7 +77,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
           <CardHeader>
             <h3 className="mb-0">환자 케이스 정보</h3>
             <p className="text-sm mb-0">
-              적용기간 만 수정이 가능 합니다.
+              활성화 된 항목 만 수정이 가능 합니다.
             </p>
           </CardHeader>
           <CardBody>
@@ -94,7 +108,6 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   <div className="d-flex">
                     {
                       diagList.map((value, index) => {
-                        console.log(value)
                         checked = defChecked(data.diagCd, value.diagCd)
                         return (
                             <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
@@ -191,11 +204,11 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   <div className="d-flex">
                     {
                       specialNoteList.map((value, index) => {
-                        checked = defChecked(data.specialNote, value.value)
+                        checked = defChecked(data.specialNote, value.key)
                         return (
                             <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
                               <Input className="custom-control-input" checked={checked} id={"specialNote" + index}
-                                     type="checkbox" disabled={true}
+                                     type="checkbox"
                                      name={"specialNote"} value={value.key} onChange={handleChange}/>
                               <Label className="custom-control-label"
                                      htmlFor={"specialNote" + index}>{value.content}</Label>
@@ -242,7 +255,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                   />
                 </Col>
                 <div className="custom-control ml-7">
-                  적용기간 미 선택 시 적용기간 상관 없음
+                  적용기간 삭제 시 적용기간 상관 없음
                 </div>
               </FormGroup>
               <FormGroup className="row">

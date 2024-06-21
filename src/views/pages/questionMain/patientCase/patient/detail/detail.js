@@ -1,7 +1,6 @@
 import {requestApi} from "../../../../../../api/mainApi"
 import warning from "../../../../components/Alert/SweetAlert/warning";
 import success from "../../../../components/Alert/SweetAlert/success";
-import loginWarning from "../../../../components/Alert/SweetAlert/loginWarning";
 
 export function detail(key, setData, setIsOpenAlert) {
   requestApi("/patientCase/detailSelectApi", key).then((res) => {

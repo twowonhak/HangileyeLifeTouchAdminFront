@@ -1,7 +1,7 @@
 import SpecialNote from "../views/pages/questionMain/patientCase/specialNote/list";
-import PatientCase from "../views/pages/questionMain/patientCase/patient/list";
+import PatientCase from "../views/pages/questionMain/patientCase/patient";
 import QuestionList from "../views/pages/questionMain/questionExampleCase/question/list";
-import ResponseList from "../views/pages/questionMain/response/list";
+import ResponseList from "../views/pages/questionMain/response";
 import Case from "../views/pages/questionMain/case";
 
 const routes = [
@@ -41,7 +41,7 @@ const routes = [
     layout: "/questionMain",
   },
   {
-    path: "/charts",
+    path: "/response",
     name: "환자 답변 조회",
     icon: "ni ni-notification-70 text-pink",
     component: <ResponseList />,

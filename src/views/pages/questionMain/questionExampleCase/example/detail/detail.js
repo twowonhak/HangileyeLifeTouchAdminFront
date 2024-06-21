@@ -1,7 +1,6 @@
 import warning from "../../../../components/Alert/SweetAlert/warning";
 import {requestApi} from "../../../../../../api/mainApi";
 import success from "../../../../components/Alert/SweetAlert/success";
-import loginWarning from "../../../../components/Alert/SweetAlert/loginWarning";
 
 export function detail(queInfo, setData, setIsOpenAlert) {
   requestApi("/example/detailSelectApi", queInfo).then((res) => {

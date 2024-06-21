@@ -7,7 +7,6 @@ export function sortList(key, setData, setIsOpenAlert) {
   requestApi("/example/listSelectApi", data).then((res) => {
     if (res.resultCode === "0000") {
       setData(res.data)
-      console.log('1111111111111111111111->',res.data)
     } else {
       warning(setIsOpenAlert, res.resultMessage)
     }

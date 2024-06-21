@@ -1,11 +1,14 @@
 import React, {memo, useEffect, useState} from "react";
-import {diagListSelect, onSave, specialNoteListSelect} from "./insert";
+import {useNavigate} from "react-router-dom";
+import {diagListSelect, specialNoteListSelect} from "../insert/insert";
 import inputData from "../../../../../../utiles/fun/inputData";
 import inputCheck from "../../../../../../utiles/fun/inputCheck";
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label} from "reactstrap";
-import {birth, pagtTy, sex, type} from "variables/question/patient";
+import {birth, pagtTy, sex, type} from "../../../../../../variables/question/patient";
+import {onSave, onSearch} from "./search";
+import NotificationAlert from "../../../../components/Alert/Modals/Notification";
 
-export default memo(function Insert({setIsOpenMainFun}) {
+export default memo(function Search({patInfo, onOpenFun}) {
 
   const [data, setData] = useState({
     type: "",
@@ -22,6 +25,8 @@ export default memo(function Insert({setIsOpenMainFun}) {
   const [diagList, setDiagList] = useState([]);
   const [specialNoteList, setSpecialNoteList] = useState([]);
   const [alert, setAlert] = useState(null);
+  const [isNotificationAlertOpen, setIsNotificationAlertOpen] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // 진료과 조회
@@ -38,14 +43,22 @@ export default memo(function Insert({setIsOpenMainFun}) {
     inputCheck(e, data, setData)
   };
 
+  const insertAlert = () => {
+    setIsNotificationAlertOpen(
+        <NotificationAlert type={"primary"} isModalOpen={alert} setIsModalOpen={setIsNotificationAlertOpen} title={"등록"}
+                           contents={"검색 내용으로 등록 된 환자 케이스가 없습니다. 새롭게 등록 하시겠습니까?"} onClickFun={()=>{onSave(patInfo, data, onOpenFun, setAlert)}}/>
+    )
+  };
+
   return (
       <>
         {alert}
+        {isNotificationAlertOpen}
         <Card>
           <CardHeader>
-            <h3 className="mb-0">환자 케이스 등록</h3>
+            <h3 className="mb-0">환자 케이스</h3>
             <p className="text-sm mb-0">
-              등록 하시고자 하는 환자 케이스를 등록 해주세요.
+              검색 데이터가 있으면 등록, 없으면 상세 페이지 이동
             </p>
           </CardHeader>
           <CardBody>
@@ -57,9 +70,12 @@ export default memo(function Insert({setIsOpenMainFun}) {
                     {
                       type.map((value, index) => {
                         return (
-                            <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
-                              <Input className="custom-control-input" id={value.name + index} type="checkbox" name={value.name} value={value.value} onChange={handleChange}/>
-                              <Label className="custom-control-label" htmlFor={value.name + index}>{value.title}</Label>
+                            <div key={index}
+                                 className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
+                              <Input className="custom-control-input" id={value.name + index} type="checkbox"
+                                     name={value.name} value={value.value} onChange={handleChange}/>
+                              <Label className="custom-control-label"
+                                     htmlFor={value.name + index}>{value.title}</Label>
                             </div>
                         )
                       })
@@ -74,9 +90,12 @@ export default memo(function Insert({setIsOpenMainFun}) {
                     {
                       diagList.map((value, index) => {
                         return (
-                            <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
-                              <Input className="custom-control-input" id={"diagCd" + index} type="checkbox" name={"diagCd"} value={value.diagCd} onChange={handleChange}/>
-                              <Label className="custom-control-label" htmlFor={"diagCd" + index}>{value.diag}</Label>
+                            <div key={index}
+                                 className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
+                              <Input className="custom-control-input" id={"diagCd" + index} type="checkbox"
+                                     name={"diagCd"} value={value.diagCd} onChange={handleChange}/>
+                              <Label className="custom-control-label"
+                                     htmlFor={"diagCd" + index}>{value.diag}</Label>
                             </div>
                         )
                       })
@@ -91,9 +110,12 @@ export default memo(function Insert({setIsOpenMainFun}) {
                     {
                       birth.map((value, index) => {
                         return (
-                            <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
-                              <Input className="custom-control-input" id={value.name + index} type="checkbox" name={value.name} value={value.value} onChange={handleChange}/>
-                              <Label className="custom-control-label" htmlFor={value.name + index}>{value.title}</Label>
+                            <div key={index}
+                                 className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
+                              <Input className="custom-control-input" id={value.name + index} type="checkbox"
+                                     name={value.name} value={value.value} onChange={handleChange}/>
+                              <Label className="custom-control-label"
+                                     htmlFor={value.name + index}>{value.title}</Label>
                             </div>
                         )
                       })
@@ -108,9 +130,12 @@ export default memo(function Insert({setIsOpenMainFun}) {
                     {
                       sex.map((value, index) => {
                         return (
-                            <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
-                              <Input className="custom-control-input" id={value.name + index} type="checkbox" name={value.name} value={value.value} onChange={handleChange}/>
-                              <Label className="custom-control-label" htmlFor={value.name + index}>{value.title}</Label>
+                            <div key={index}
+                                 className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
+                              <Input className="custom-control-input" id={value.name + index} type="checkbox"
+                                     name={value.name} value={value.value} onChange={handleChange}/>
+                              <Label className="custom-control-label"
+                                     htmlFor={value.name + index}>{value.title}</Label>
                             </div>
                         )
                       })
@@ -123,7 +148,9 @@ export default memo(function Insert({setIsOpenMainFun}) {
                 <Col md="10">
                   <div className="d-flex">
                     <div className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
-                      <Input className="custom-control-input" id={"preYn"} type="checkbox" name={"preYn"} value={"Y"} onChange={handleChange}/>
+                      <Input className="custom-control-input" id={"preYn"} type="checkbox" name={"preYn"}
+                             value={"Y"}
+                             onChange={handleChange}/>
                       <Label className="custom-control-label" htmlFor={"preYn"}>임신중</Label>
                     </div>
                   </div>
@@ -136,9 +163,12 @@ export default memo(function Insert({setIsOpenMainFun}) {
                     {
                       pagtTy.map((value, index) => {
                         return (
-                            <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
-                              <Input className="custom-control-input" id={value.name + index} type="checkbox" name={value.name} value={value.value} onChange={handleChange}/>
-                              <Label className="custom-control-label" htmlFor={value.name + index}>{value.title}</Label>
+                            <div key={index}
+                                 className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
+                              <Input className="custom-control-input" id={value.name + index} type="checkbox"
+                                     name={value.name} value={value.value} onChange={handleChange}/>
+                              <Label className="custom-control-label"
+                                     htmlFor={value.name + index}>{value.title}</Label>
                             </div>
                         )
                       })
@@ -153,9 +183,12 @@ export default memo(function Insert({setIsOpenMainFun}) {
                     {
                       specialNoteList.map((value, index) => {
                         return (
-                            <div key={index} className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
-                              <Input className="custom-control-input" id={"specialNote" + index} type="checkbox" name={"specialNote"} value={value.key} onChange={handleChange}/>
-                              <Label className="custom-control-label" htmlFor={"specialNote" + index}>{value.content}</Label>
+                            <div key={index}
+                                 className="custom-control custom-checkbox mr-3 mt-2 align-items-center">
+                              <Input className="custom-control-input" id={"specialNote" + index} type="checkbox"
+                                     name={"specialNote"} value={value.key} onChange={handleChange}/>
+                              <Label className="custom-control-label"
+                                     htmlFor={"specialNote" + index}>{value.content}</Label>
                             </div>
                         )
                       })
@@ -163,49 +196,12 @@ export default memo(function Insert({setIsOpenMainFun}) {
                   </div>
                 </Col>
               </FormGroup>
-              <FormGroup className="row">
-                <Label
-                    className="form-control-label"
-                    htmlFor="example-date-input"
-                    md="1"
-                >
-                  적용기간 - 시작
-                </Label>
-                <Col md="10">
-                  <Input
-                      id="example-date-input"
-                      type="date"
-                      name={"useStrDat"}
-                      onChange={onInputData}
-                  />
-                </Col>
-              </FormGroup>
-              <FormGroup className="row">
-                <Label
-                    className="form-control-label"
-                    htmlFor="example-date-input"
-                    md="1"
-                >
-                  적용기간 - 마감
-                </Label>
-                <Col md="10">
-                  <Input
-                      id="example-date-input"
-                      type="date"
-                      name={"useEndDat"}
-                      onChange={onInputData}
-                  />
-                </Col>
-                <div className="custom-control ml-7">
-                    적용기간 삭제 시 적용기간 상관 없음
-                </div>
-              </FormGroup>
               <Button
                   color="primary"
                   type="button"
-                  onClick={()=> onSave(data, setIsOpenMainFun, setAlert)}
+                  onClick={() => onSearch(patInfo, data, insertAlert, onOpenFun)}
               >
-                등록
+                검색
               </Button>
             </Form>
           </CardBody>

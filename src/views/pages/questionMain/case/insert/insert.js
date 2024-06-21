@@ -3,7 +3,10 @@ import info from "../../../components/Alert/SweetAlert/info";
 import warning from "../../../components/Alert/SweetAlert/warning";
 
 export function listSelect(setDataList, searchDate) {
-  requestApi("/case/queListSelectApi", searchDate).then((res) => {
+  let data = {
+    key: searchDate.current,
+  }
+  requestApi("/case/queListSelectApi", data).then((res) => {
     if (res.resultCode === "0000") {
       setDataList(res.data)
     } else {
@@ -20,9 +23,10 @@ export function queInsert(patInfo, checkData, setIsOpenAlert, onOpenFun) {
       patKey: patInfo.current,
       queKeyArr: checkData
     }
+
     requestApi("/case/insertApi", data).then((res) => {
       if (res.resultCode === "0000") {
-        onOpenFun()
+        info(setIsOpenAlert, "질문 추가 되었습니다.", onOpenFun)
       } else {
         info(setIsOpenAlert, res.resultMessage)
       }

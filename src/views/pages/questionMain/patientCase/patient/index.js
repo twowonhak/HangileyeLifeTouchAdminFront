@@ -1,34 +1,45 @@
 import React, {useEffect, useRef, useState} from "react";
-import listSelect from "./list";
-import SimpleHeader from "../../../../../../components/Headers/SimpleHeader";
+import listSelect from "./list/list";
+import SimpleHeader from "../../../../../components/Headers/SimpleHeader";
 import {Container, Row} from "reactstrap";
-import Insert from "../insert";
-import Detail from "../detail";
-import List from "../../../../components/List";
+import Insert from "./insert";
+import Detail from "./detail";
+import List from "../../../components/List";
+import Search from "./search";
 
 export default function PatientCase() {
 
   const info = useRef('')
   const [dataList, setDataList] = useState([])
   const [isOpenMain, setIsOpenMain] = useState(true);
+  const [isOpenList, setIsOpenList] = useState(true);
   const [isOpenInsert, setIsOpenInsert] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(null);
   const menu = [
     {
-      name: '메인', fun: () => {
-        setIsOpenMain(true)
+      name: '리스트', fun: () => {
+        setIsOpenList(true)
+        setIsOpenMain(false)
         setIsOpenInsert(false)
         setIsOpenDetail(false)
       }
     },
     {
-      name: '등록', fun: () => {
-        setIsOpenMain(false)
-        setIsOpenInsert(true)
+      name: '검색', fun: () => {
+        setIsOpenList(false)
+        setIsOpenMain(true)
+        setIsOpenInsert(false)
         setIsOpenDetail(false)
       }
     },
+    // {
+    //   name: '등록', fun: () => {
+    //     setIsOpenMain(false)
+    //     setIsOpenInsert(true)
+    //     setIsOpenDetail(false)
+    //   }
+    // },
   ]
   const columns = [
     {
@@ -69,17 +80,19 @@ export default function PatientCase() {
   ]
 
   useEffect(() => {
-    if (!isOpenInsert && !isOpenDetail) {
+    if (isOpenList) {
       listSelect(setDataList)
     }
-  }, [isOpenMain])
+  }, [isOpenList])
 
   const setIsOpenDetailFun = () => {
+    setIsOpenList(false)
     setIsOpenMain(false)
     setIsOpenInsert(false)
     setIsOpenDetail(true)
   }
   const setIsOpenMainFun = () => {
+    setIsOpenList(false)
     setIsOpenMain(true)
     setIsOpenInsert(false)
     setIsOpenDetail(false)
@@ -93,6 +106,8 @@ export default function PatientCase() {
           <Row>
             <div className="col">
               {isOpenMain ?
+                  <Search patInfo={info} onOpenFun={setIsOpenDetailFun} /> : null}
+              {isOpenList ?
                   <List dataList={dataList} type={'radio'} info={info} columns={columns} title={"환자정보"} contents={"등록된 환자 정보 입니다."}
                         setIsOpenDetailFun={setIsOpenDetailFun}/> : null}
               {isOpenInsert ?

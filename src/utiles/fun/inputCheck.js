@@ -12,6 +12,9 @@ export default function inputCheck(e, data, setData) {
   let arr // 문자열을 '/' 기준으로 분리하여 배열로 만듭니다
   let index
 
+  if(data[name] === null)
+    data[name] = ''
+
   if (e.currentTarget.checked) {
     res = data[name].replaceAll(value, '')
     res = res.replaceAll('//', '');

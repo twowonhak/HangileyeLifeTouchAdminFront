@@ -8,7 +8,6 @@ import ExampleInsert from "../insert"
 import ExampleDetail from "../detail"
 import SortUpdate from "../sort"
 import {detail, onDelete, onUpdate} from "../../question/detail/detail";
-import {useNavigate} from "react-router-dom";
 
 
 export default function ExampleList({queInfo, setIsOpenMainFun}) {
@@ -105,8 +104,6 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
     )
   };
 
-  console.log('data--->', data)
-
   return (
       <>
         {isOpenAlert}
@@ -177,7 +174,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
                       />
                     </Col>
                     <div className="custom-control ml-7">
-                      적용기간 미 선택 시 적용기간 상관 없음
+                      적용기간 삭제 시 적용기간 상관 없음
                     </div>
                   </FormGroup>
                   <FormGroup className="row">
