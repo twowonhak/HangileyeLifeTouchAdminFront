@@ -15,20 +15,26 @@ import AdminLayout from "views/layouts/Admin.js";
 import RTLLayout from "views/layouts/RTL.js";
 import AuthLayout from "views/layouts/Auth.js";
 import QuestionLayout from "views/layouts/Question.js";
+import StockLayout from "views/layouts/Stock.js";
+import Test from "./views/pages/test";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="*" element={<Navigate to="/auth/login" replace />} />
-      <Route path="/auth/*" element={<AuthLayout />} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="*" element={<Navigate to="/auth/login" replace/>}/>
+        <Route path="/auth/*" element={<AuthLayout/>}/>
 
-      <Route path="/questionMain/*" element={<QuestionLayout />} />
+        {/* 문지표 */}
+        <Route path="/questionMain/*" element={<QuestionLayout/>}/>
 
+        {/* 재고관리 */}
+        <Route path="/stockMain/*" element={<StockLayout/>}/>
 
-      <Route path="/admin/*" element={<AdminLayout />} />
-      <Route path="/rtl/*" element={<RTLLayout />} />
-    </Routes>
-  </BrowserRouter>
+        <Route path="/admin/*" element={<AdminLayout/>}/>
+        <Route path="/rtl/*" element={<RTLLayout/>}/>
+        <Route path="/test" element={<Test/>}/>
+      </Routes>
+    </BrowserRouter>
 );

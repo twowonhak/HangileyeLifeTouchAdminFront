@@ -10,16 +10,16 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
 
   const [data, setData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const [alert, setAlert] = useState(false);
   const [isNotificationAlertOpen, setIsNotificationAlertOpen] = useState(null);
 
   useEffect(() => {
-    detail(info, setData, setIsOpenAlert)
+    detail(info, setData, setAlert)
   }, [])
 
   useDidMountEffect(() => {
     setIsModalOpen(null)
-  }, [isOpenAlert])
+  }, [alert])
 
   const onInputData = (e) => {
     inputData(e, data, setData)
@@ -27,13 +27,13 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
 
   const deleteAlert = () => {
     setIsNotificationAlertOpen(
-        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, setIsOpenMainFun, setIsOpenAlert)}/>
+        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, setIsOpenMainFun, setAlert)}/>
     )
   };
 
   return (
       <>
-        {isOpenAlert}
+        {alert}
         {isNotificationAlertOpen}
         <Card>
           <CardHeader>
@@ -54,7 +54,7 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
                 </Label>
                 <Col md="10">
                   <Input
-                      placeholder="최대 30자 입니다."
+                      placeholder="최대 30자"
                       id="example-text-input"
                       type="text"
                       maxLength={60}

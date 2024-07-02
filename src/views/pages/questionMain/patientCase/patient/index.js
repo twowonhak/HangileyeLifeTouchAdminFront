@@ -15,7 +15,7 @@ export default function PatientCase() {
   const [isOpenList, setIsOpenList] = useState(true);
   const [isOpenInsert, setIsOpenInsert] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
-  const [isOpenAlert, setIsOpenAlert] = useState(null);
+  const [alert, setAlert] = useState(null);
   const menu = [
     {
       name: '리스트', fun: () => {
@@ -100,7 +100,7 @@ export default function PatientCase() {
 
   return (
       <>
-        {isOpenAlert}
+        {alert}
         <SimpleHeader name="환자 케이스" parentName="문진표" menu={menu}/>
         <Container className="mt--6" fluid>
           <Row>

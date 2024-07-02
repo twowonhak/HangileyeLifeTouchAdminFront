@@ -37,7 +37,7 @@ export default memo(function Insert({setIsOpenMainFun}) {
                 </Label>
                 <Col md="10">
                   <Input
-                      placeholder="최대 30자 입니다."
+                      placeholder="최대 30자"
                       id="example-text-input"
                       type="text"
                       maxLength={60}

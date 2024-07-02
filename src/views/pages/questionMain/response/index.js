@@ -7,7 +7,7 @@ export default function Response() {
   const chartNo = useRef('')
   const [isOpenSearch, setIsOpenSearch] = useState(true);
   const [isOpenResult, setIsOpenResult] = useState(false);
-  const [isOpenAlert, setIsOpenAlert] = useState(null);
+  const [alert, setAlert] = useState(null);
 
   function setIsOpenSearchFun() {
     setIsOpenSearch(true)
@@ -21,15 +21,15 @@ export default function Response() {
 
   return (
       <>
-        {isOpenAlert}
+        {alert}
         {
           isOpenSearch
-            ? <ChartSearch chartNo={chartNo} setIsOpenAlert={setIsOpenAlert} setIsOpenResultFun={setIsOpenResultFun}/>
+            ? <ChartSearch chartNo={chartNo} setAlert={setAlert} setIsOpenResultFun={setIsOpenResultFun}/>
             : null
         }
         {
           isOpenResult
-              ? <PatInfo chartNo={chartNo} setIsOpenAlert={setIsOpenAlert} setIsOpenSearchFun={setIsOpenSearchFun}/>
+              ? <PatInfo chartNo={chartNo} setAlert={setAlert} setIsOpenSearchFun={setIsOpenSearchFun}/>
               : null
         }
       </>

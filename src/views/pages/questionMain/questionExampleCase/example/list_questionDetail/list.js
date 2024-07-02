@@ -1,7 +1,8 @@
 import {requestApi} from "../../../../../../api/mainApi";
 
 export default function listSelect(info, setDataList) {
-  requestApi("/example/listSelectApi", info).then((res) => {
+  const data = {key:info}
+  requestApi("/example/listSelectApi", data).then((res) => {
     if (res.resultCode === "0000") {
       setDataList(res.data !== null ? res.data : [])
     } else {

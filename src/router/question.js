@@ -3,8 +3,16 @@ import PatientCase from "../views/pages/questionMain/patientCase/patient";
 import QuestionList from "../views/pages/questionMain/questionExampleCase/question/list";
 import ResponseList from "../views/pages/questionMain/response";
 import Case from "../views/pages/questionMain/case";
+import Result from "../views/pages/questionMain/result";
 
 const routes = [
+  {
+    path: "/result",
+    name: "최종 문진표",
+    icon: "ni ni-atom text-black",
+    component: <Result />,
+    layout: "/questionMain",
+  },
   {
     path: "/case",
     name: "케이스",

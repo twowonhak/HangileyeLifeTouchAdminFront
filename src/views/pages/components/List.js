@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import {paging} from "./pagination";
 
-export default function List({dataList, type, info, insertFun, setCheckData, columns, title, contents, setIsOpenDetailFun}) {
+export default function List({dataList, type, info, insertFun, setCheckData, columns, title, contents, setIsOpenDetailFun, search}) {
   const {SearchBar} = Search;
   const pagination = paging()
   const [check, setCheck] = useState([])
@@ -33,7 +33,7 @@ export default function List({dataList, type, info, insertFun, setCheckData, col
 
   const rowEvents = {
     onDoubleClick: (e, row, rowIndex) => {
-      info.current = row
+      info.current = row.key
       setIsOpenDetailFun()
     }
   };
@@ -64,17 +64,26 @@ export default function List({dataList, type, info, insertFun, setCheckData, col
                 <div className="py-4 table-responsive">
                   <div
                       id="datatable-basic_filter"
-                      className="dataTables_filter px-4 pb-1"
+                      className="dataTables_filter px-4 pb-1 d-flex justify-content-between w-100"
                   >
-                    <label>
-                      Search:
-                      <SearchBar
-                          className="form-control-sm"
-                          placeholder=""
-                          {...props.searchProps}
-                      />
-                    </label>
+                    <div>
+                      <label>
+                        Search:
+                        <SearchBar
+                            className="form-control-sm"
+                            placeholder=""
+                            {...props.searchProps}
+                        />
+                      </label>
+                    </div>
+
+                    {
+                      search
+                          ? search
+                          : null
+                    }
                   </div>
+
                   <BootstrapTable
                       {...props.baseProps}
                       bootstrap4={true}

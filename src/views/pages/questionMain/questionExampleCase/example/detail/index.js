@@ -10,21 +10,21 @@ export default memo(function ExampleDetail({info, setIsOpenListFun}) {
     content:'',
     type:''
   })
-  const [isOpenAlert, setIsOpenAlert] = useState(null);
+  const [alert, setAlert] = useState(null);
 
   useEffect(() => {
-    detail(info, setData, setIsOpenAlert)
+    detail(info, setData, setAlert)
   }, [])
 
   const deleteAlert = () => {
-    setIsOpenAlert(
-        <NotificationAlert type={"danger"} setIsModalOpen={setIsOpenAlert} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(data, setIsOpenAlert, setIsOpenListFun)}/>
+    setAlert(
+        <NotificationAlert type={"danger"} setIsModalOpen={setAlert} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(data, setAlert, setIsOpenListFun)}/>
     )
   };
 
   return (
       <>
-        {isOpenAlert}
+        {alert}
         <Card>
           <CardHeader>
             <h3 className="mb-0">보기 상세</h3>
@@ -44,7 +44,7 @@ export default memo(function ExampleDetail({info, setIsOpenListFun}) {
                 </Label>
                 <Col md="10">
                   <Input
-                      placeholder="최대 30자 입니다."
+                      placeholder="최대 30자"
                       id="example-text-input"
                       type="text"
                       maxLength={60}

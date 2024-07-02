@@ -3,7 +3,7 @@ import info from "../../../../components/Alert/SweetAlert/info";
 import {requestApi} from "../../../../../../api/mainApi";
 import {diagListApi} from "../../../../../../api/common";
 
-export function onSave(data, setIsOpen, setIsOpenAlert) {
+export function onSave(data, setIsOpen, setAlert) {
   if (data.useStrDat === '') {
     data.useStrDat = '99999999'
   }
@@ -25,13 +25,13 @@ export function onSave(data, setIsOpen, setIsOpenAlert) {
       if (res.resultCode === "0000") {
         setIsOpen()
       } else {
-        info(setIsOpenAlert, res.resultMessage)
+        info(setAlert, res.resultMessage)
       }
     }).catch((e) => {
       console.error(e)
     })
   } else {
-    warning(setIsOpenAlert, "필수 항목 체크가 필요 합니다.")
+    warning(setAlert, "필수 항목 체크가 필요 합니다.")
   }
 }
 

@@ -3,7 +3,7 @@ import {Card, CardBody, CardHeader, Col, Container, Row} from "reactstrap";
 import SimpleHeader from "../../../../../../components/Headers/SimpleHeader";
 import {responseList} from "./resResult";
 
-export default function ResResult({chartNo, setIsOpenAlert, setIsOpenSearchFun, setIsOpenResResult}) {
+export default function ResResult({chartNo, setAlert, setIsOpenSearchFun, setIsOpenResResult}) {
 
   console.log(chartNo.current)
 
@@ -24,7 +24,7 @@ export default function ResResult({chartNo, setIsOpenAlert, setIsOpenSearchFun, 
   }])
 
   useEffect(() => {
-    responseList(chartNo.current.app, setIsOpenAlert, setDataList)
+    responseList(chartNo.current.app, setAlert, setDataList)
   }, [])
 
   const menu = [

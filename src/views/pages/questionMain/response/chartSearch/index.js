@@ -4,7 +4,7 @@ import SimpleHeader from "../../../../../components/Headers/SimpleHeader";
 import {chartSearchFun} from "./chartSearch";
 import inputOnlyNumber from "../../../../../utiles/fun/inputOnlyNumber";
 
-export default function ChartSearch({chartNo, setIsOpenAlert, setIsOpenResultFun}) {
+export default function ChartSearch({chartNo, setAlert, setIsOpenResultFun}) {
 
 
   const [chartSearch, setChartSearch] = useState({chartNo: ''})
@@ -41,7 +41,7 @@ export default function ChartSearch({chartNo, setIsOpenAlert, setIsOpenResultFun
                     <Button
                         color="info"
                         type="button"
-                        onClick={() => chartSearchFun(chartSearch, chartNo, setIsOpenAlert, setIsOpenResultFun)}
+                        onClick={() => chartSearchFun(chartSearch, chartNo, setAlert, setIsOpenResultFun)}
                     >
                       검색
                     </Button>

@@ -6,7 +6,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import warning from "../../../../components/Alert/SweetAlert/warning";
 
-export default function AppoList({chartNo, setIsOpenAlert, setIsOpenResResult}) {
+export default function AppoList({chartNo, setAlert, setIsOpenResResult}) {
 
   const [dataList, setDataList] = useState([])
   const {SearchBar} = Search;
@@ -14,7 +14,7 @@ export default function AppoList({chartNo, setIsOpenAlert, setIsOpenResResult}) 
   const [check, setCheck] = useState([])
 
   useEffect(() => {
-    appointmentList(chartNo, setIsOpenAlert, setDataList)
+    appointmentList(chartNo, setAlert, setDataList)
   }, [])
 
   const columns = [
@@ -86,7 +86,7 @@ export default function AppoList({chartNo, setIsOpenAlert, setIsOpenResResult}) 
         chartNo.current.app = row
         setIsOpenResResult(false)
       }else{
-        warning(setIsOpenAlert, '문진표 미작성')
+        warning(setAlert, '문진표 미작성')
       }
     }
   };

@@ -19,14 +19,20 @@ export default function MainMenu() {
                   <div className="text-center text-muted mb-4">
                     <small>권한 필요 시 전산요청 사항을 작성 해주세요.</small>
                   </div>
-                  <Link to="/questionMain">
-                    <Button block color="primary" size="lg" type="button">
-                      문진표
-                    </Button>
-                  </Link>
-                  {/*<Button block color="secondary" size="lg" type="button">*/}
-                  {/*  Block level button*/}
-                  {/*</Button>*/}
+                  <div className="mb-4">
+                    <Link to="/questionMain">
+                      <Button block color="primary" size="lg" type="button">
+                        문진표
+                      </Button>
+                    </Link>
+                  </div>
+                  <div className="mb-4">
+                    <Link to="/stockMain">
+                      <Button block color="secondary" size="lg" type="button">
+                        재고 관리
+                      </Button>
+                    </Link>
+                  </div>
                 </CardBody>
               </Card>
             </Col>

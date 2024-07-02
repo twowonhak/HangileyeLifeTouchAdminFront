@@ -199,7 +199,7 @@ export default memo(function Search({patInfo, onOpenFun}) {
               <Button
                   color="primary"
                   type="button"
-                  onClick={() => onSearch(patInfo, data, insertAlert, onOpenFun)}
+                  onClick={() => onSearch(patInfo, data, insertAlert, onOpenFun, setAlert)}
               >
                 검색
               </Button>

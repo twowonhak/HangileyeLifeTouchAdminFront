@@ -7,8 +7,7 @@ export default function Case() {
   const patInfo = useRef('')
   const [isOpenSearch, setIsOpenSearch] = useState(true);
   const [isOpenList, setIsOpenList] = useState(false);
-
-  const [isOpenAlert, setIsOpenAlert] = useState(null);
+  const [alert, setAlert] = useState(null);
 
   function setIsOpenSearchFun() {
     setIsOpenSearch(true)
@@ -22,15 +21,15 @@ export default function Case() {
 
   return (
       <>
-        {isOpenAlert}
+        {alert}
         {
           isOpenSearch
-              ? <Search patInfo={patInfo} onOpenFun={setIsOpenListFun} setIsOpenAlert={setIsOpenAlert}/>
+              ? <Search patInfo={patInfo} onOpenFun={setIsOpenListFun} setAlert={setAlert}/>
               : null
         }
         {
           isOpenList
-              ? <CaseList patInfo={patInfo} onOpenFun={setIsOpenSearchFun} setIsOpenAlert={setIsOpenAlert}/>
+              ? <CaseList patInfo={patInfo} onOpenFun={setIsOpenSearchFun} setAlert={setAlert}/>
               : null
         }
       </>

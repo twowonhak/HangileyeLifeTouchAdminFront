@@ -13,3 +13,16 @@ export function onSearch(info, data, onOpenFun, setAlert) {
     console.error(e)
   })
 }
+
+export function caseDataList(info, setDataList, setAlert){
+  requestApi("/case/listSelectApi").then((res) => {
+    if (res.resultCode === "0000") {
+      console.log(res.data)
+      setDataList(res.data)
+    } else {
+      warning(setAlert, res.resultMessage)
+    }
+  }).catch((e) => {
+    console.error(e)
+  })
+}

@@ -2,13 +2,14 @@ import warning from "../../../../components/Alert/SweetAlert/warning";
 import {requestApi} from "../../../../../../api/mainApi";
 import success from "../../../../components/Alert/SweetAlert/success";
 
-export function sortList(key, setData, setIsOpenAlert) {
+export function sortList(key, setData, setAlert) {
+  console.log(key)
   const data = {key : key}
   requestApi("/example/listSelectApi", data).then((res) => {
     if (res.resultCode === "0000") {
       setData(res.data)
     } else {
-      warning(setIsOpenAlert, res.resultMessage)
+      warning(setAlert, res.resultMessage)
     }
   }).catch((e) => {
     console.error(e)
@@ -16,12 +17,12 @@ export function sortList(key, setData, setIsOpenAlert) {
 }
 
 
-export function update(dataList, setIsOpenAlert) {
+export function update(dataList, setAlert) {
   requestApi("/example/sortUpdateApi", dataList).then((res) => {
     if (res.resultCode === "0000") {
-      success(setIsOpenAlert, "순서 변경 완료 되었습니다.")
+      success(setAlert, "순서 변경 완료 되었습니다.")
     } else {
-      warning(setIsOpenAlert, res.resultMessage)
+      warning(setAlert, res.resultMessage)
     }
   }).catch((e) => {
     console.error(e)

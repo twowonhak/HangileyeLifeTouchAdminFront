@@ -1,8 +1,13 @@
 import axios from 'axios';
 import {browserName, deviceType, osName} from "react-device-detect";
 
+
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8084/api', headers: {
+
+  // baseURL: `${process.env.API_URL}`
+  baseURL: 'http://localhost:8084/api'
+  // baseURL: 'http://192.168.118.81:8084/api'
+  , headers: {
     "Content-Type": "application/json; charset=utf-8",
   }, timeout: 10000,
 });

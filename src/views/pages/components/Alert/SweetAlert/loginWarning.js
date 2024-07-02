@@ -1,9 +1,9 @@
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
-export default function loginWarning(setIsOpenAlert,navigate) {
+export default function loginWarning(setAlert,navigate) {
 
 
-  setIsOpenAlert(
+  setAlert(
       <ReactBSAlert
           warning
           style={{display: "block", marginTop: "-100px"}}

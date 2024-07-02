@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import ResResult from "./resResult";
 import Info from "./info";
 
-export default function PatInfo({chartNo, setIsOpenAlert, setIsOpenSearchFun}) {
+export default function PatInfo({chartNo, setAlert, setIsOpenSearchFun}) {
 
   const [isOpenResResult, setIsOpenResResult] = useState(true)
 
@@ -10,8 +10,8 @@ export default function PatInfo({chartNo, setIsOpenAlert, setIsOpenSearchFun}) {
       <>
         {
           isOpenResResult
-              ? <Info chartNo={chartNo} setIsOpenAlert={setIsOpenAlert} setIsOpenSearchFun={setIsOpenSearchFun} setIsOpenResResult={setIsOpenResResult}/>
-              : <ResResult chartNo={chartNo} setIsOpenAlert={setIsOpenAlert} setIsOpenSearchFun={setIsOpenSearchFun} setIsOpenResResult={setIsOpenResResult}/>
+              ? <Info chartNo={chartNo} setAlert={setAlert} setIsOpenSearchFun={setIsOpenSearchFun} setIsOpenResResult={setIsOpenResResult}/>
+              : <ResResult chartNo={chartNo} setAlert={setAlert} setIsOpenSearchFun={setIsOpenSearchFun} setIsOpenResResult={setIsOpenResResult}/>
         }
       </>
   )

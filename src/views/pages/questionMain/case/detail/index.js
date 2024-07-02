@@ -1,6 +1,6 @@
 import React, {memo} from "react";
 
-export default memo(function Detail({info, onOpenFun, setIsOpenAlert}) {
+export default memo(function Detail({info, onOpenFun, setAlert}) {
 
   return (
       <>

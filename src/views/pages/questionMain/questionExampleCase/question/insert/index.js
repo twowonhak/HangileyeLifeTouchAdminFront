@@ -40,7 +40,7 @@ export default memo(function QuestionInsert({setIsOpenMainFun}) {
                 </Label>
                 <Col md="10">
                   <Input
-                      placeholder="최대 60자 입니다."
+                      placeholder="최대 60자"
                       id="example-text-input"
                       type="text"
                       maxLength={120}

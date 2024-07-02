@@ -3,7 +3,7 @@ import React from "react";
 import SimpleHeader from "../../../../../../components/Headers/SimpleHeader";
 import AppoList from "../appoList";
 
-export default function Info({chartNo, setIsOpenAlert, setIsOpenSearchFun, setIsOpenResResult}) {
+export default function Info({chartNo, setAlert, setIsOpenSearchFun, setIsOpenResResult}) {
   const menu = [
     {
       name: '환자검색(차트번호)', fun: () => {
@@ -81,7 +81,7 @@ export default function Info({chartNo, setIsOpenAlert, setIsOpenSearchFun, setIs
             </div>
           </Row>
           {
-            <AppoList chartNo={chartNo} setIsOpenAlert={setIsOpenAlert} setIsOpenResResult={setIsOpenResResult}/>
+            <AppoList chartNo={chartNo} setAlert={setAlert} setIsOpenResResult={setIsOpenResResult}/>
           }
         </Container>
       </>

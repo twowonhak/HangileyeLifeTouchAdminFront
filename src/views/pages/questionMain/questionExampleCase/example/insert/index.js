@@ -2,10 +2,8 @@ import React, {memo, useState} from "react";
 import inputData from "../../../../../../utiles/fun/inputData";
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label} from "reactstrap";
 import {onSave} from "./insert";
-import {useNavigate} from "react-router-dom";
 
 export default memo(function ExampleInsert({setIsOpenListFun,queKey}) {
-
 
   const [data, setData] = useState({
     queKey: queKey || '',
@@ -41,7 +39,7 @@ export default memo(function ExampleInsert({setIsOpenListFun,queKey}) {
                 </Label>
                 <Col md="10">
                   <Input
-                      placeholder="최대 30자 입니다."
+                      placeholder="최대 30자"
                       id="example-text-input"
                       type="text"
                       maxLength={60}

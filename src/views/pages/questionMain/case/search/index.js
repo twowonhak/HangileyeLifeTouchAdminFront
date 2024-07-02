@@ -1,15 +1,16 @@
-import React, {memo, useEffect, useState} from "react";
+import React, {memo, useEffect, useRef, useState} from "react";
 import {Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 import {birth, pagtTy, sex, type} from "variables/question/patient";
-import {useNavigate} from "react-router-dom";
 import {diagListSelect, specialNoteListSelect} from "../../patientCase/patient/insert/insert";
 import inputCheck from "../../../../../utiles/fun/inputCheck";
 import inputData from "../../../../../utiles/fun/inputData";
 import SimpleHeader from "../../../../../components/Headers/SimpleHeader";
-import {onSearch} from "./search";
+import {caseDataList, onSearch} from "./search";
+import List from "../../../components/List";
 
-export default memo(function Search({patInfo, onOpenFun, setIsOpenAlert}) {
+export default memo(function Search({patInfo, onOpenFun, setAlert}) {
 
+  const info = useRef('')
   const [data, setData] = useState({
     type: "",
     diagCd: "",
@@ -21,17 +22,53 @@ export default memo(function Search({patInfo, onOpenFun, setIsOpenAlert}) {
     useStrDat: "",
     useEndDat: ""
   })
-
+  const [dataList, setDataList] = useState([]);
   const [diagList, setDiagList] = useState([]);
   const [specialNoteList, setSpecialNoteList] = useState([]);
-  const [alert, setAlert] = useState(null);
-  const navigate = useNavigate();
+  const columns = [
+    {
+      dataField: "key",
+      text: "KEY",
+      sort: true,
+    },
+    {
+      dataField: "type",
+      text: "진료타입",
+      sort: true,
+    },
+    {
+      dataField: "diagCd",
+      text: "진료과",
+      sort: true,
+    },
+    {
+      dataField: "sex",
+      text: "성별",
+      sort: true,
+    },
+    {
+      dataField: "birth",
+      text: "나이",
+      sort: true,
+    },
+    {
+      dataField: "pagtTy",
+      text: "과거력",
+      sort: true,
+    },
+    {
+      dataField: "specialNote",
+      text: "특이사항",
+      sort: true,
+    },
+  ]
 
   useEffect(() => {
     // 진료과 조회
     diagListSelect(setDiagList)
     // 특이사항 조회
     specialNoteListSelect(setSpecialNoteList)
+    caseDataList(info, setDataList, setAlert)
   }, [])
 
   const onInputData = (e) => {
@@ -40,6 +77,7 @@ export default memo(function Search({patInfo, onOpenFun, setIsOpenAlert}) {
 
   const handleChange = (e) => {
     inputCheck(e, data, setData)
+
   };
 
   return (
@@ -48,7 +86,6 @@ export default memo(function Search({patInfo, onOpenFun, setIsOpenAlert}) {
         <Container className="mt--6" fluid>
           <Row>
             <div className="col">
-              {alert}
               <Card>
                 <CardHeader>
                   <h3 className="mb-0">케이스</h3>
@@ -201,6 +238,8 @@ export default memo(function Search({patInfo, onOpenFun, setIsOpenAlert}) {
                   </Form>
                 </CardBody>
               </Card>
+              <List dataList={dataList} type={'radio'} info={patInfo} columns={columns} title={"환자 케이스 목록"} contents={""}
+                    setIsOpenDetailFun={onOpenFun}/>
             </div>
           </Row>
         </Container>

@@ -6,7 +6,7 @@ export function listSelect(setDataList, searchDate) {
   let data = {
     key: searchDate.current,
   }
-  requestApi("/case/queListSelectApi", data).then((res) => {
+  requestApi("/case/noListSelectApi", data).then((res) => {
     if (res.resultCode === "0000") {
       setDataList(res.data)
     } else {
@@ -17,7 +17,7 @@ export function listSelect(setDataList, searchDate) {
   })
 }
 
-export function queInsert(patInfo, checkData, setIsOpenAlert, onOpenFun) {
+export function queInsert(patInfo, checkData, setAlert, onOpenFun) {
   if (checkData.length) {
     let data = {
       patKey: patInfo.current,
@@ -26,16 +26,16 @@ export function queInsert(patInfo, checkData, setIsOpenAlert, onOpenFun) {
 
     requestApi("/case/insertApi", data).then((res) => {
       if (res.resultCode === "0000") {
-        info(setIsOpenAlert, "질문 추가 되었습니다.", onOpenFun)
+        info(setAlert, "질문 추가 되었습니다.", onOpenFun)
       } else {
-        info(setIsOpenAlert, res.resultMessage)
+        info(setAlert, res.resultMessage)
       }
     }).catch((e) => {
       console.error(e)
-      // loginWarning(setIsOpenAlert, navigate)
+      // loginWarning(setAlert, navigate)
     })
   } else {
-    warning(setIsOpenAlert, "질문이 선택 되지 않았습니다.")
+    warning(setAlert, "질문이 선택 되지 않았습니다.")
   }
 
 

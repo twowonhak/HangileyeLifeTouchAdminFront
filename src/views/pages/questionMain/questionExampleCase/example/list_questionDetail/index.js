@@ -20,7 +20,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
   const [isOpenInsert, setIsOpenInsert] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
   const [isOpenSortUpdate, setIsOpenSortUpdate] = useState(false);
-  const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const [alert, setAlert] = useState(false);
   const [isNotificationAlertOpen, setIsNotificationAlertOpen] = useState(null);
 
   const columns = [
@@ -42,7 +42,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
   ]
 
   useEffect(() => {
-    detail(queInfo, setData, setIsOpenAlert)
+    detail(queInfo, setData, setAlert)
   }, [])
 
   useEffect(() => {
@@ -92,7 +92,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
     setIsNotificationAlertOpen(
         <NotificationAlert type={"danger"} setIsModalOpen={setIsNotificationAlertOpen}
                            title={"삭제"} contents={`해당 정보를 삭제 하시겠습니까?\n삭제 시 해당 보기에 내용도 함께 삭제 됩니다.`}
-                           onClickFun={() => onDelete(data, setIsOpenMainFun, setIsOpenAlert)}/>
+                           onClickFun={() => onDelete(data, setIsOpenMainFun, setAlert)}/>
     )
   };
 
@@ -100,13 +100,13 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
     setIsNotificationAlertOpen(
         <NotificationAlert type={"primary"} setIsModalOpen={setIsNotificationAlertOpen}
                            title={"수정"} contents={"해당 정보를 수정 하시겠습니까?"}
-                           onClickFun={() => onUpdate(data, setIsOpenAlert, setIsNotificationAlertOpen)}/>
+                           onClickFun={() => onUpdate(data, setAlert, setIsNotificationAlertOpen)}/>
     )
   };
 
   return (
       <>
-        {isOpenAlert}
+        {alert}
         {isNotificationAlertOpen}
         <Row>
           <div className="col">
@@ -130,7 +130,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
                     </Label>
                     <Col md="10">
                       <Input
-                          placeholder="최대 60자 입니다."
+                          placeholder="최대 60자"
                           id="example-text-input"
                           type="text"
                           readOnly={true}
@@ -300,7 +300,7 @@ export default function ExampleList({queInfo, setIsOpenMainFun}) {
             }
             {
               isOpenSortUpdate ?
-                  <SortUpdate dataKey={queInfo.key}/> : null
+                  <SortUpdate dataKey={queInfo}/> : null
             }
           </div>
         </Row>

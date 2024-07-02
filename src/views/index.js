@@ -17,7 +17,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const [cookies, setCookie, removeCookie] = useCookies();
-  const [isOpenAlert, setIsOpenAlert] = useState(null)
+  const [alert, setAlert] = useState(null)
 
   useEffect(()=>{
     Object.keys(cookies).forEach(name => {
@@ -32,7 +32,7 @@ export default function Login() {
 
   return (
       <>
-        {isOpenAlert}
+        {alert}
         <AuthHeader
             title="한길 안과 병원"
             lead="병원 내부에서 사용하는 공용 웹 사이트 입니다."
@@ -45,7 +45,7 @@ export default function Login() {
                   <div className="text-center text-muted mb-4">
                     <small>회원 정보는 OCX(이온엠) 계정과 동일 합니다.</small>
                   </div>
-                  <Form role="form" onSubmit={(e) => login(e, loginData, navigate, setIsOpenAlert)}>
+                  <Form role="form" onSubmit={(e) => login(e, loginData, navigate, setAlert)}>
                     <FormGroup className="mb-3">
                       <InputGroup className="input-group-alternative">
                         <Input

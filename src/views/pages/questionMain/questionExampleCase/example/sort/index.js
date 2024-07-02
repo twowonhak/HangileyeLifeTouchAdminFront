@@ -6,10 +6,11 @@ import {sortList, update} from "./sort";
 export default memo(function SortUpdate({dataKey}) {
 
   const [dataList, setDataList] = useState([])
-  const [isOpenAlert, setIsOpenAlert] = useState(null);
+  const [alert, setAlert] = useState(null);
 
   useEffect(() => {
-    sortList(dataKey, setDataList, setIsOpenAlert)
+    console.log('dataKey===>',dataKey)
+    sortList(dataKey, setDataList, setAlert)
   }, [])
 
   const sortChange = (type, row) => {
@@ -49,12 +50,12 @@ export default memo(function SortUpdate({dataKey}) {
 
 
   const sortUpdate = () => {
-    update(dataList, setIsOpenAlert)
+    update(dataList, setAlert)
   }
 
   return (
       <>
-        {isOpenAlert}
+        {alert}
         <SortList columns={columns} title={"보기 순서"} dataList={dataList} sortUpdate={sortUpdate}/>
       </>
   )

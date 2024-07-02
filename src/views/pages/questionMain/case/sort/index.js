@@ -3,7 +3,7 @@ import {changeArrayOrder} from "../../../../../utiles/fun/changeArrayOrder";
 import SortList from "../../../components/SortList";
 import {sortList, update} from "./sort";
 
-export default memo(function Sort({infoKey, onOpenFun, setIsOpenAlert}) {
+export default memo(function Sort({infoKey, onOpenFun, setAlert}) {
 
   const [dataList, setDataList] = useState([])
 
@@ -27,7 +27,7 @@ export default memo(function Sort({infoKey, onOpenFun, setIsOpenAlert}) {
   }
 
   useEffect(()=>{
-    sortList(infoKey, setDataList, setIsOpenAlert)
+    sortList(infoKey, setDataList, setAlert)
   },[])
 
   // 버튼 렌더링 함수
@@ -47,7 +47,7 @@ export default memo(function Sort({infoKey, onOpenFun, setIsOpenAlert}) {
 
 
   const sortUpdate = () => {
-    update(dataList, setIsOpenAlert)
+    update(dataList, setAlert)
   }
 
   return (

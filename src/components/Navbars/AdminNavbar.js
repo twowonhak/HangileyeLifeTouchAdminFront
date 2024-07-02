@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 // nodejs library that concatenates classes
 import classnames from "classnames";
 // nodejs library to set properties for components
@@ -19,6 +19,7 @@ import {
 import {useCookies} from "react-cookie";
 import {Link, useNavigate} from "react-router-dom";
 import loginWarning from "../../views/pages/components/Alert/SweetAlert/loginWarning";
+import useDidMountEffect from "../../hook/useDidMountEffect";
 
 function AdminNavbar({theme, sidenavOpen, toggleSidenav}) {
 
@@ -26,7 +27,7 @@ function AdminNavbar({theme, sidenavOpen, toggleSidenav}) {
   const [cookies, setCookie, removeCookie] = useCookies();
   const navigate = useNavigate();
   //
-  useEffect(() => {
+  useDidMountEffect(() => {
     if (cookies.ID === undefined) {
       loginWarning(setAlert, navigate)
     }

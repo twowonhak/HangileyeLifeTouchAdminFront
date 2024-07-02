@@ -7,8 +7,10 @@ import Sort from "../sort";
 import Insert from "../insert";
 import NotificationAlert from "../../../components/Alert/Modals/Notification";
 import {listSelect, onDelete} from "./list";
+import {Tooltip} from 'react-tooltip';
 
-export default memo(function CaseList({patInfo, onOpenFun, setIsOpenAlert}) {
+export default memo(function CaseList({patInfo, onOpenFun, setAlert}) {
+
   const info = useRef('')
   const [dataList, setDataList] = useState([])
   const [isOpenList, setIsOpenList] = useState(true);
@@ -49,6 +51,12 @@ export default memo(function CaseList({patInfo, onOpenFun, setIsOpenAlert}) {
       dataField: "content",
       text: "질문 내용",
       sort: true,
+      formatter: (cell, row) => (
+            <div>
+              <span data-tooltip-id="tooltip" data-tooltip-content={row.exampleArr}>{cell}</span>
+              <Tooltip id="tooltip" effect="solid" place="bottom" type="dark" />
+            </div>
+      )
     },
     {
       dataField: "useStrDat",
@@ -63,7 +71,7 @@ export default memo(function CaseList({patInfo, onOpenFun, setIsOpenAlert}) {
   ]
 
   useEffect(() => {
-    if (setIsOpenList) {
+    if (isOpenList) {
       listSelect(setDataList, patInfo)
     }
   }, [isOpenList])
@@ -98,7 +106,7 @@ export default memo(function CaseList({patInfo, onOpenFun, setIsOpenAlert}) {
 
   const deleteAlert = () => {
     setIsNotificationAlertOpen(
-        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, patInfo, setDataList, setIsNotificationAlertOpen,setIsOpenAlert)}/>
+        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, patInfo, setDataList, setIsNotificationAlertOpen,setAlert)}/>
     )
   };
 
@@ -112,26 +120,29 @@ export default memo(function CaseList({patInfo, onOpenFun, setIsOpenAlert}) {
               {
                 isOpenList
                     ? <List dataList={dataList} type={'radio'} info={info} columns={columns} title={"질문 (환자 케이스 키:" + patInfo.current + ")"}
-                            contents={"조회 한 환자 케이스에 등록된 질문 정보 입니다."} setIsOpenDetailFun={deleteAlert}/>
+                            contents={"조회 된 환자 케이스에 등록된 질문 정보 입니다."} setIsOpenDetailFun={deleteAlert}/>
                     : null
               }
               {
                 isOpenInsert
-                    ? <Insert patInfo={patInfo} onOpenFun={setIsOpenListFun} setIsOpenAlert={setIsOpenAlert}/>
+                    ? <Insert patInfo={patInfo} onOpenFun={setIsOpenListFun} setAlert={setAlert}/>
                     : null
               }
               {
                 isOpenDetail
-                    ? <Detail info={info} onOpenFun={setIsOpenDetailFun} setIsOpenAlert={setIsOpenAlert}/>
+                    ? <Detail info={info} onOpenFun={setIsOpenDetailFun} setAlert={setAlert}/>
                     : null
               }
               {
                 isOpenSort
-                    ? <Sort infoKey={patInfo} onOpenFun={setIsOpenSortFun} setIsOpenAlert={setIsOpenAlert}/>
+                    ? <Sort infoKey={patInfo} onOpenFun={setIsOpenSortFun} setAlert={setAlert}/>
                     : null
               }
             </div>
           </Row>
+
+
+
         </Container>
       </>
   )

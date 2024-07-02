@@ -31,18 +31,18 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
   const [diagList, setDiagList] = useState([]);
   const [specialNoteList, setSpecialNoteList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const [alert, setAlert] = useState(false);
   const [isNotificationAlertOpen, setIsNotificationAlertOpen] = useState(null);
   let checked
 
   useEffect(() => {
     let reqData = {key : (info.current.key ? info.current.key : info.current)}
-    detail(reqData, setData, setIsOpenAlert)
+    detail(reqData, setData, setAlert)
     // 진료과 조회
     diagListSelect(setDiagList)
     // 특이사항 조회
     specialNoteListSelect(setSpecialNoteList)
-  }, [isOpenAlert])
+  }, [alert])
 
   useDidMountEffect(() => {
     setIsModalOpen(null)
@@ -58,20 +58,20 @@ export default memo(function Detail({info, setIsOpenMainFun}) {
 
   const deleteAlert = () => {
     setIsNotificationAlertOpen(
-        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, setIsOpenMainFun, setIsOpenAlert)}/>
+        <NotificationAlert type={"danger"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(info, setIsOpenMainFun, setAlert)}/>
     )
   };
 
   const updateAlert = (e) => {
     setIsNotificationAlertOpen(
-        <NotificationAlert type={"primary"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"수정"} contents={"해당 정보를 수정 하시겠습니까?"} onClickFun={() => onUpdate(data, setIsOpenAlert, setIsNotificationAlertOpen)}/>
+        <NotificationAlert type={"primary"} isModalOpen={isModalOpen} setIsModalOpen={setIsNotificationAlertOpen} title={"수정"} contents={"해당 정보를 수정 하시겠습니까?"} onClickFun={() => onUpdate(data, setAlert, setIsNotificationAlertOpen)}/>
     )
   };
 
 
   return (
       <>
-        {isOpenAlert}
+        {alert}
         {isNotificationAlertOpen}
         <Card>
           <CardHeader>
