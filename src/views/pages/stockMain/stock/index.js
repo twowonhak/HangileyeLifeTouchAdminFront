@@ -8,6 +8,15 @@ import StockList from "./list";
 export default function Stock() {
   const info = useRef('')
 
+  const [searchData, setSearchData] = useState({
+    assMainCd: '',
+    assSubCd: '',
+    buil: '',
+    floor: '',
+    team: '',
+    useYn: '',
+  })
+
   const [isOpenList, setIsOpenList] = useState(true);
   const [isOpenInsert, setIsOpenInsert] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
@@ -53,7 +62,7 @@ export default function Stock() {
             <div className="col">
               {
                 isOpenList
-                    ? <StockList isOpenList={isOpenList} info={info} setIsOpenDetailFun={setIsOpenDetailFun}/>
+                    ? <StockList searchData={searchData} setSearchData={setSearchData} isOpenList={isOpenList} info={info} setIsOpenDetailFun={setIsOpenDetailFun}/>
                     : null
               }
               {

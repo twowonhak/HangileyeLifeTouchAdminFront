@@ -3,7 +3,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import React from "react";
 import ToolkitProvider from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 
-export default function SortList({columns, dataList, title, sortUpdate}) {
+export default function SortList({columns, dataList, title, sortUpdate, search}) {
   return (
       <>
         <Card>
@@ -13,7 +13,13 @@ export default function SortList({columns, dataList, title, sortUpdate}) {
               <p className="text-sm mb-0">
                 상위 열이 먼저 가장 먼저 나오는 정보입니다.
               </p>
-              <Button className={"btn btn-success btn-sm"} onClick={sortUpdate}>순서 변경 하기</Button>
+              <div>
+                {
+                  search
+                      ? search
+                      : null
+                }
+              </div>
             </div>
           </CardHeader>
           <ToolkitProvider
@@ -24,6 +30,13 @@ export default function SortList({columns, dataList, title, sortUpdate}) {
           >
             {(props) => (
                 <div className="py-4 table-responsive">
+
+                  <div
+                      id="datatable-basic_filter"
+                      className="dataTables_filter px-4 pb-1 d-flex justify-content-between w-100"
+                  >
+                    <Button className={"btn btn-success btn-sm ml-auto mb-2"} onClick={sortUpdate}>순서 변경 하기</Button>
+                  </div>
 
                   <BootstrapTable
                       {...props.baseProps}

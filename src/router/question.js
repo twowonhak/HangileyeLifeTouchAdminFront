@@ -1,11 +1,19 @@
-import SpecialNote from "../views/pages/questionMain/patientCase/specialNote/list";
-import PatientCase from "../views/pages/questionMain/patientCase/patient";
-import QuestionList from "../views/pages/questionMain/questionExampleCase/question/list";
-import ResponseList from "../views/pages/questionMain/response";
-import Case from "../views/pages/questionMain/case";
-import Result from "../views/pages/questionMain/result";
+import SpecialNote from "../views/pages/questionMain/dummy/patientCase/specialNote/list";
+import PatientCase from "../views/pages/questionMain/dummy/patientCase/patient";
+import QuestionList from "../views/pages/questionMain/dummy/questionExampleCase/question/list";
+import ResponseList from "../views/pages/questionMain/dummy/response";
+import Case from "../views/pages/questionMain/dummy/case";
+import Result from "../views/pages/questionMain/dummy/result";
+import Large from "../views/pages/questionMain/code/large";
 
 const routes = [
+  {
+    path: "/large",
+    name: "코드",
+    icon: "ni ni-atom text-black",
+    component: <Large />,
+    layout: "/questionMain",
+  },
   {
     path: "/result",
     name: "최종 문진표",

@@ -24,7 +24,7 @@ export default function Detail({info, onOpenFun, setAlert}) {
     memo: '',
   })
 
-  const [cdList, setCdData] = useState({assetMain:[], assetSub:[], team:[]})
+  const [cdList, setCdData] = useState({assetMain:[], assetSub:[], team:[], code: []})
 
   useEffect(() => {
     detail(info, setData, setAlert)
@@ -143,22 +143,22 @@ export default function Detail({info, onOpenFun, setAlert}) {
                   층
                 </Label>
                 <Col md="10">
-                  <Input type="select" name={"floor"} onChange={onInputData}>
-                    <option selected={data.floor === ''} value={""}></option>
-                    <option selected={data.floor === 'B4'} value={"B4"}>B4</option>
-                    <option selected={data.floor === 'B3'} value={"B3"}>B3</option>
-                    <option selected={data.floor === 'B2'} value={"B2"}>B2</option>
-                    <option selected={data.floor === 'B1'} value={"B1"}>B1</option>
-                    <option selected={data.floor === '1'} value={"1"}>1</option>
-                    <option selected={data.floor === '2'} value={"2"}>2</option>
-                    <option selected={data.floor === '3'} value={"3"}>3</option>
-                    <option selected={data.floor === '4'} value={"4"}>4</option>
-                    <option selected={data.floor === '5'} value={"5"}>5</option>
-                    <option selected={data.floor === '6'} value={"6"}>6</option>
-                    <option selected={data.floor === '7'} value={"7"}>7</option>
-                    <option selected={data.floor === '8'} value={"8"}>8</option>
-                    <option selected={data.floor === '9'} value={"9"}>9</option>
-                    <option selected={data.floor === '10'} value={"10"}>10</option>
+                  <Input type="select" name={"floor"} onChange={onInputData} value={data.floor || ''}>
+                    <option value={""}></option>
+                    <option value={"B4"}>B4</option>
+                    <option value={"B3"}>B3</option>
+                    <option value={"B2"}>B2</option>
+                    <option value={"B1"}>B1</option>
+                    <option value={"1"}>1</option>
+                    <option value={"2"}>2</option>
+                    <option value={"3"}>3</option>
+                    <option value={"4"}>4</option>
+                    <option value={"5"}>5</option>
+                    <option value={"6"}>6</option>
+                    <option value={"7"}>7</option>
+                    <option value={"8"}>8</option>
+                    <option value={"9"}>9</option>
+                    <option value={"10"}>10</option>
                   </Input>
                 </Col>
               </FormGroup>
@@ -171,9 +171,11 @@ export default function Detail({info, onOpenFun, setAlert}) {
                   부서
                 </Label>
                 <Col md="10">
-                  <Input type="select" name={"team"} onChange={onInputData}>
+                  <Input type="select" name={"team"} onChange={onInputData} value={data.team || ''}>
                     {
-                      cdList.team.map((value,index)=> <option key={index} selected={value.key === data.team} value={value.key}>{value.name}</option>)
+                      cdList.code
+                          ? cdList.team.map((value,index)=> <option key={index} value={value.key}>{value.name}</option>)
+                          : null
                     }
                   </Input>
                 </Col>
@@ -193,7 +195,7 @@ export default function Detail({info, onOpenFun, setAlert}) {
                       type="text"
                       maxLength={10}
                       name={"place"}
-                      value={data.place}
+                      defaultValue={data.place}
                       onChange={onInputData}
                   />
                 </Col>
@@ -213,7 +215,7 @@ export default function Detail({info, onOpenFun, setAlert}) {
                       type="text"
                       maxLength={10}
                       name={"userNm"}
-                      value={data.userNm}
+                      defaultValue={data.userNm }
                       onChange={onInputData}
                   />
                 </Col>
@@ -227,15 +229,17 @@ export default function Detail({info, onOpenFun, setAlert}) {
                   구입년도
                 </Label>
                 <Col md="10">
-                  <Input
-                      placeholder="YYYY"
-                      id="example-text-input"
-                      type="text"
-                      maxLength={4}
-                      name={"year"}
-                      value={data.year}
-                      onChange={onInputData}
-                  />
+                  <Input type="select" name={"year"} onChange={onInputData} value={data.year || ''}>
+                    <option value=""></option>
+                    {
+                      cdList.code
+                          ? cdList.code.map((value, index) => {
+                            if (value.codeNm === 'YEAR')
+                              return <option key={index} value={value.optionNm}>{value.optionNm}</option>
+                          })
+                          : null
+                    }
+                  </Input>
                 </Col>
               </FormGroup>
               <FormGroup className="row">
@@ -253,7 +257,7 @@ export default function Detail({info, onOpenFun, setAlert}) {
                       type="text"
                       maxLength={15}
                       name={"ip"}
-                      value={data.ip}
+                      defaultValue={data.ip}
                       onChange={onInputData}
                   />
                 </Col>
@@ -267,15 +271,17 @@ export default function Detail({info, onOpenFun, setAlert}) {
                   MS_OFFICE
                 </Label>
                 <Col md="10">
-                  <Input
-                      placeholder="최대 5자"
-                      id="example-text-input"
-                      type="ip"
-                      maxLength={5}
-                      name={"ms"}
-                      value={data.ms}
-                      onChange={onInputData}
-                  />
+                  <Input type="select" name={"ms"} onChange={onInputData} value={data.ms || ''}>
+                    <option value=""></option>
+                    {
+                      cdList.code
+                          ? cdList.code.map((value, index) => {
+                            if (value.codeNm === 'MS')
+                              return <option key={index} value={value.optionNm}>{value.optionNm}</option>
+                          })
+                          : null
+                    }
+                  </Input>
                 </Col>
               </FormGroup>
               <FormGroup className="row">
@@ -284,18 +290,20 @@ export default function Detail({info, onOpenFun, setAlert}) {
                     htmlFor="example-text-input"
                     md="1"
                 >
-                  한글_HWP
+                  HWP
                 </Label>
                 <Col md="10">
-                  <Input
-                      placeholder="최대 5자"
-                      id="example-text-input"
-                      type="text"
-                      maxLength={5}
-                      name={"hwp"}
-                      value={data.hwp}
-                      onChange={onInputData}
-                  />
+                  <Input type="select" name={"hwp"} onChange={onInputData} value={data.hwp || ''}>>
+                    <option value=""></option>
+                    {
+                      cdList.code
+                          ? cdList.code.map((value, index) => {
+                            if (value.codeNm === 'HWP')
+                              return <option key={index} value={value.optionNm}>{value.optionNm}</option>
+                          })
+                          : null
+                    }
+                  </Input>
                 </Col>
               </FormGroup>
               <FormGroup className="row">
@@ -331,7 +339,7 @@ export default function Detail({info, onOpenFun, setAlert}) {
                       type="text"
                       maxLength={20}
                       name={"memo"}
-                      value={data.memo}
+                      defaultValue={data.memo}
                       onChange={onInputData}
                   />
                 </Col>
@@ -339,44 +347,44 @@ export default function Detail({info, onOpenFun, setAlert}) {
 
               {{
                 'Y': <>
-                        <Button
-                            color="warning"
-                            type="button"
-                            onClick={updateAlert}
-                        >
-                          수정
-                        </Button>
-                        <Button
-                            color="info"
-                            type="button"
-                            onClick={clearAlert}
-                        >
-                          회수
-                        </Button>
-                        <Button
-                            color="danger"
-                            type="button"
-                            onClick={deleteAlert}
-                        >
-                          폐기
-                        </Button>
-                    </>,
+                  <Button
+                      color="warning"
+                      type="button"
+                      onClick={updateAlert}
+                  >
+                    수정
+                  </Button>
+                  <Button
+                      color="info"
+                      type="button"
+                      onClick={clearAlert}
+                  >
+                    회수
+                  </Button>
+                  <Button
+                      color="danger"
+                      type="button"
+                      onClick={deleteAlert}
+                  >
+                    폐기
+                  </Button>
+                </>,
                 'N': <>
-                        <Button
-                            color="success"
-                            type="button"
-                            onClick={useAlert}
-                        >
-                          사용
-                        </Button>
-                        <Button
-                            color="danger"
-                            type="button"
-                            onClick={deleteAlert}
-                        >
-                          폐기
-                        </Button>
-                    </>,
+                  <Button
+                      color="success"
+                      type="button"
+                      onClick={useAlert}
+                  >
+                    사용
+                  </Button>
+                  <Button
+                      color="danger"
+                      type="button"
+                      onClick={deleteAlert}
+                  >
+                    폐기
+                  </Button>
+                </>,
                 'D': null
               }[data.useYn] || null}
 

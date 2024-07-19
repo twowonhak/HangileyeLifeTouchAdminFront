@@ -15,7 +15,6 @@ export function assOpList(setAssData) {
 export function cdKeyList(setCdData) {
   requestApi("/stock/stock/cdListSelectApi").then((res) => {
     if (res.resultCode === "0000") {
-      console.log(res.data)
       setCdData(res.data)
     } else {
     }

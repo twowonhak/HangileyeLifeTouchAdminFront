@@ -78,7 +78,7 @@ function Question() {
             {getRoutes(routes)}
             <Route
                 path="*"
-                element={<Navigate to="/questionMain/case" replace />}
+                element={<Navigate to="/questionMain/result" replace />}
             />
           </Routes>
         </div>

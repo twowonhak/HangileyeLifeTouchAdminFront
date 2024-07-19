@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import {paging} from "./pagination";
 
-export default function List({dataList, type, info, insertFun, setCheckData, columns, title, contents, setIsOpenDetailFun, search}) {
+export default function List({dataList, type, info, insertFun, columns, title, contents, setIsOpenDetailFun, search, btnName}) {
   const {SearchBar} = Search;
   const pagination = paging()
   const [check, setCheck] = useState([])
@@ -48,8 +48,13 @@ export default function List({dataList, type, info, insertFun, setCheckData, col
                 {contents}
               </p>
               {
-                type === "checkbox"
-                    ? <Button className={"btn btn-success btn-sm"} onClick={()=>insertFun(check)}>등록</Button>
+                btnName !== undefined
+                    ? <Button className={"btn btn-success btn-sm"} onClick={()=>insertFun(check)}>{btnName}</Button>
+                    : null
+              }
+              {
+                search
+                    ? search
                     : null
               }
             </div>
@@ -77,11 +82,6 @@ export default function List({dataList, type, info, insertFun, setCheckData, col
                       </label>
                     </div>
 
-                    {
-                      search
-                          ? search
-                          : null
-                    }
                   </div>
 
                   <BootstrapTable

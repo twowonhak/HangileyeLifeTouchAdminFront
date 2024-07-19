@@ -258,7 +258,7 @@ export default function Insert({info, onOpenFun, setAlert}) {
                     htmlFor="example-text-input"
                     md="1"
                 >
-                  MS_OFFICE
+                  HWP
                 </Label>
                 <Col md="10">
                   <Input type="select" name={"hwp"} onChange={onInputData}>

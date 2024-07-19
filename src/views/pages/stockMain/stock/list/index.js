@@ -4,15 +4,8 @@ import {listSelect} from "./list";
 import {cdKeyList} from "../insert/insert";
 import inputData from "../../../../../utiles/fun/inputData";
 
-export default function StockList({isOpenList, info, setIsOpenDetailFun}) {
+export default function StockList({searchData, setSearchData,isOpenList, info, setIsOpenDetailFun}) {
 
-  const [searchData, setSearchData] = useState({
-    assMainCd: '',
-    assSubCd: '',
-    buil: '',
-    floor: '',
-    team: '',
-  })
   const [dataList, setDataList] = useState([])
   const [cdList, setCdData] = useState({assetMain: [], assetSub: [], team: []})
 
@@ -169,6 +162,15 @@ export default function StockList({isOpenList, info, setIsOpenDetailFun}) {
               {
                 cdList.team.map((value, index) => <option key={index} value={value.key}>{value.name}</option>)
               }
+            </select>
+          </label>
+          <label className="mr-3">
+            사용:
+            <select className="form form-control-sm ml-2" value={searchData.useYn} name={"useYn"} onChange={onInputData}>
+              <option value={""}></option>
+              <option value={"Y"}>사용</option>
+              <option value={"N"}>미사용</option>
+              <option value={"D"}>폐기</option>
             </select>
           </label>
           <button type="button" className="btn btn-outline-primary btn-sm" onClick={clear}>초기화</button>

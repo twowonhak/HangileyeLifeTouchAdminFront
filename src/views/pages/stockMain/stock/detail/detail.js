@@ -7,7 +7,6 @@ export function detail(info, setData, setAlert) {
   requestApi("/stock/stock/detailSelectApi", resData).then((res) => {
     if (res.resultCode === "0000") {
       setData(res.data)
-      console.log(res.data)
     } else {
       warning(setAlert, res.resultMessage)
     }
