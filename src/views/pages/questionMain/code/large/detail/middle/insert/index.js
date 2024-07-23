@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import inputData from "../../../../../../../../utiles/fun/inputData";
 import {onSave} from "./insert";
 
-export default function MidInsert({lrgData, setAlert, isOpenListFun , search}) {
+export default function MidInsert({lrgData, setAlert, isOpenListFun , SubMenu}) {
 
   const [data, setData] = useState({
     lrgCtgCd : lrgData.lrgCtgCd,
@@ -25,7 +25,7 @@ export default function MidInsert({lrgData, setAlert, isOpenListFun , search}) {
         <p className="text-sm mb-0">
           위 대분류 하위에 등록 하시고자 하는 중 분류를 작성 해주세요.
         </p>
-        {search}
+        {SubMenu}
         </div>
       </CardHeader>
       <CardBody>

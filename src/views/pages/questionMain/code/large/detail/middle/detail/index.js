@@ -4,7 +4,7 @@ import NotificationAlert from "../../../../../../components/Alert/Modals/Notific
 import {detailSelect, onDelete, onUpdate} from "./detail";
 import inputData from "../../../../../../../../utiles/fun/inputData";
 
-export default function MidDetail({info, setAlert, search, mainIsOpenListFun}) {
+export default function MidDetail({info, setAlert, SubMenu, mainIsOpenListFun}) {
 
   const [data, setData] = useState("")
 
@@ -22,7 +22,7 @@ export default function MidDetail({info, setAlert, search, mainIsOpenListFun}) {
                            title={"삭제"} contents={`해당 정보를 삭제 하시겠습니까?`}
                            onClickFun={() => onDelete(data, setAlert, mainIsOpenListFun)}/>
     )
-  };
+  }
 
   const updateAlert = () => {
     setAlert(
@@ -30,7 +30,7 @@ export default function MidDetail({info, setAlert, search, mainIsOpenListFun}) {
                            title={"수정"} contents={"해당 정보를 수정 하시겠습니까?"}
                            onClickFun={() => onUpdate(data, setAlert)}/>
     )
-  };
+  }
 
   return (
       <Row>
@@ -42,7 +42,7 @@ export default function MidDetail({info, setAlert, search, mainIsOpenListFun}) {
               <p className="text-sm mb-0">
 
               </p>
-              {search}
+              {SubMenu}
               </div>
             </CardHeader>
             <CardBody>
@@ -67,15 +67,6 @@ export default function MidDetail({info, setAlert, search, mainIsOpenListFun}) {
                   </Col>
                 </FormGroup>
                 <Button
-                    color="danger"
-                    type="button"
-                    size={'sm'}
-                    outline
-                    onClick={deleteAlert}
-                >
-                  삭제
-                </Button>
-                <Button
                     color="warning"
                     type="button"
                     size={'sm'}
@@ -83,6 +74,15 @@ export default function MidDetail({info, setAlert, search, mainIsOpenListFun}) {
                     onClick={updateAlert}
                 >
                   수정
+                </Button>
+                <Button
+                    color="danger"
+                    type="button"
+                    size={'sm'}
+                    outline
+                    onClick={deleteAlert}
+                >
+                  삭제
                 </Button>
               </Form>
             </CardBody>

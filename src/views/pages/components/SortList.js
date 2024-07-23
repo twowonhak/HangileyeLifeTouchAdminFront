@@ -3,7 +3,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import React from "react";
 import ToolkitProvider from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 
-export default function SortList({columns, dataList, title, sortUpdate, search}) {
+export default function SortList({columns, dataList, title, sortUpdate, SubMenu}) {
   return (
       <>
         <Card>
@@ -15,8 +15,8 @@ export default function SortList({columns, dataList, title, sortUpdate, search})
               </p>
               <div>
                 {
-                  search
-                      ? search
+                  SubMenu
+                      ? SubMenu
                       : null
                 }
               </div>

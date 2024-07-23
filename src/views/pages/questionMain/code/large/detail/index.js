@@ -94,7 +94,7 @@ export default function Detail({info, setAlert, mainIsOpenListFun, search}) {
       listSelect(info, setAlert, setDataList);
   },[isOpenList])
 
-  const Search = () => {
+  const SubMenu = () => {
     return (
         <div>
           <button type="button" className="btn btn-outline-primary btn-sm" onClick={isOpenListFun}>목록</button>
@@ -138,18 +138,18 @@ export default function Detail({info, setAlert, mainIsOpenListFun, search}) {
                     </Col>
                   </FormGroup>
                   <Button
-                      color="danger"
-                      type="button"
-                      onClick={deleteAlert}
-                  >
-                    삭제
-                  </Button>
-                  <Button
                       color="warning"
                       type="button"
                       onClick={updateAlert}
                   >
                     수정
+                  </Button>
+                  <Button
+                      color="danger"
+                      type="button"
+                      onClick={deleteAlert}
+                  >
+                    삭제
                   </Button>
                 </Form>
               </CardBody>
@@ -160,24 +160,24 @@ export default function Detail({info, setAlert, mainIsOpenListFun, search}) {
           <div className="col">
             {
               isOpenList
-                  ? <List info={midInfo} type={'radio'} columns={columns} dataList={dataList} title={"중 분류"} search={<Search/>}
+                  ? <List info={midInfo} type={'radio'} columns={columns} dataList={dataList} title={"중 분류"} SubMenu={<SubMenu/>}
                           contents={"대 분류에 포함 된 중 분류 목록 입니다."} setAlert={setAlert}
                           setIsOpenDetailFun={isOpenDetailFun}/>
                   : null
             }
             {
               isOpenDetail
-                  ? <MidDetail info={midInfo} setAlert={setAlert} search={<Search/>} mainIsOpenListFun={isOpenListFun}/>
+                  ? <MidDetail info={midInfo} setAlert={setAlert} SubMenu={<SubMenu/>} mainIsOpenListFun={isOpenListFun}/>
                   : null
             }
             {
               isOpenInsert
-                  ? <MidInsert lrgData={data} setAlert={setAlert} search={<Search/>} isOpenListFun={isOpenListFun}/>
+                  ? <MidInsert lrgData={data} setAlert={setAlert} SubMenu={<SubMenu/>} isOpenListFun={isOpenListFun}/>
                   : null
             }
             {
               isOpenSort
-                  ? <MidSort dataList={dataList} setAlert={setAlert} search={<Search/>} />
+                  ? <MidSort dataList={dataList} setAlert={setAlert} SubMenu={<SubMenu/>} />
                   : null
             }
           </div>

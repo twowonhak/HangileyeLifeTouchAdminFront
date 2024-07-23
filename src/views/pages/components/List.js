@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import {paging} from "./pagination";
 
-export default function List({dataList, type, info, insertFun, columns, title, contents, setIsOpenDetailFun, search, btnName}) {
+export default function List({dataList, type, info, insertFun, columns, title, contents, setIsOpenDetailFun, SubMenu, btnName, SearchTab}) {
   const {SearchBar} = Search;
   const pagination = paging()
   const [check, setCheck] = useState([])
@@ -53,8 +53,8 @@ export default function List({dataList, type, info, insertFun, columns, title, c
                     : null
               }
               {
-                search
-                    ? search
+                SubMenu
+                    ? SubMenu
                     : null
               }
             </div>
@@ -81,7 +81,11 @@ export default function List({dataList, type, info, insertFun, columns, title, c
                         />
                       </label>
                     </div>
-
+                    {
+                      SearchTab
+                        ? SearchTab
+                        : null
+                    }
                   </div>
 
                   <BootstrapTable

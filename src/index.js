@@ -10,6 +10,7 @@ import "quill/dist/quill.core.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/scss/argon-dashboard-pro-react.scss?v1.2.1";
+import "./assets/css/custom.css"
 
 import AdminLayout from "views/layouts/Admin.js";
 import RTLLayout from "views/layouts/RTL.js";

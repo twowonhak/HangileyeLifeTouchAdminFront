@@ -1,11 +1,15 @@
-import React, {useState} from "react";
-import {changeArrayOrder} from "../../../../../../../../utiles/fun/changeArrayOrder";
 import SortList from "../../../../../../components/SortList";
-import {update} from "./sort";
+import React, {useEffect, useState} from "react";
+import {changeArrayOrder} from "../../../../../../../../utiles/fun/changeArrayOrder";
+import {sortListSelect, update} from "./sort";
 
-export default function MidSort({dataList, setAlert, SubMenu}) {
+export default function Sort({setAlert, info, SubMenu}) {
 
-  const [sortDataList, setSortDataList] = useState(dataList)
+  const [sortDataList, setSortDataList] = useState([])
+
+  useEffect(() => {
+    sortListSelect(setSortDataList, info, setAlert)
+  }, [])
 
   const sortChange = (type, row) => {
     let list = [...sortDataList]
@@ -38,7 +42,7 @@ export default function MidSort({dataList, setAlert, SubMenu}) {
 
   const columns = [
     {dataField: 'key', text: 'KEY'},
-    {dataField: 'midCtgNm', text: '중 분류명'},
+    {dataField: 'exaTxt', text: '보기 내용'},
     {dataField: 'sortChange', text: '순서변경', formatter: actionFormatter, headerStyle: {width: '200px'}}
   ]
 
@@ -48,7 +52,7 @@ export default function MidSort({dataList, setAlert, SubMenu}) {
 
   return (
       <>
-        <SortList columns={columns} title={"중 분류 순서"} dataList={sortDataList} sortUpdate={sortUpdate} SubMenu={SubMenu}/>
+        <SortList columns={columns} title={"보가 순서"} dataList={sortDataList} sortUpdate={sortUpdate} SubMenu={SubMenu}/>
       </>
   )
 }

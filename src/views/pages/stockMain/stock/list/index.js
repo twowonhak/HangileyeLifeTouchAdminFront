@@ -183,7 +183,7 @@ export default function StockList({searchData, setSearchData,isOpenList, info, s
   return (
       <>
         <List dataList={dataList} type={'radio'} info={info} columns={columns} title={"재고관리"}
-              contents={""} setIsOpenDetailFun={setIsOpenDetailFun} search={<Search/>}/>
+              contents={""} setIsOpenDetailFun={setIsOpenDetailFun} SearchTab={<Search/>}/>
       </>
   )
 }

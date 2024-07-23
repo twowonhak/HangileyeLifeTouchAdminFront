@@ -35,13 +35,15 @@ function TimelineHeader({name, parentName, menu}) {
                 </Col>
                 <Col className="mt-3 mt-md-0 text-md-right" lg="6" xs="5">
                   {
-                    menu.map((value, index) => {
-                      return (
-                          <Button key={index} className="btn-neutral" color="default" size="sm" onClick={value.fun}>
-                            {value.name}
-                          </Button>
-                      )
-                    })
+                    menu !== null
+                        ? menu.map((value, index) => {
+                          return (
+                              <Button key={index} className="btn-neutral" color="default" size="sm" onClick={value.fun}>
+                                {value.name}
+                              </Button>
+                          )
+                        })
+                        : null
                   }
                 </Col>
               </Row>
