@@ -1,11 +1,7 @@
-import SpecialNote from "../views/pages/questionMain/dummy/patientCase/specialNote/list";
-import PatientCase from "../views/pages/questionMain/dummy/patientCase/patient";
-import QuestionList from "../views/pages/questionMain/dummy/questionExampleCase/question/list";
 import ResponseList from "../views/pages/questionMain/dummy/response";
-import Case from "../views/pages/questionMain/dummy/case";
-import Result from "../views/pages/questionMain/dummy/result";
 import Large from "../views/pages/questionMain/code/large";
 import Question from "../views/pages/questionMain/question"
+import Result from "../views/pages/questionMain/result";
 
 const routes = [
   {
@@ -15,13 +11,13 @@ const routes = [
     component: <Result />,
     layout: "/questionMain",
   },
-  {
-    path: "/large",
-    name: "코드",
-    icon: "ni ni-atom text-black",
-    component: <Large />,
-    layout: "/questionMain",
-  },
+  // {
+  //   path: "/large",
+  //   name: "코드",
+  //   icon: "ni ni-atom text-black",
+  //   component: <Large />,
+  //   layout: "/questionMain",
+  // },
   {
     path: "/case",
     name: "질문",

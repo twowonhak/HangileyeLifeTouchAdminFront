@@ -48,7 +48,7 @@ export default function Sort({dataList, setAlert}) {
 
   return (
       <>
-        <SortList columns={columns} title={"중 분류 순서"} dataList={sortDataList} sortUpdate={sortUpdate}/>
+        <SortList columns={columns} title={"대 분류 순서"} dataList={sortDataList} sortUpdate={sortUpdate}/>
       </>
   )
 

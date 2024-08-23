@@ -4,11 +4,13 @@ import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label} 
 import {detail, onUpdate, onDelete, onClear, onUse} from "./detail";
 import NotificationAlert from "../../../components/Alert/Modals/Notification";
 import {cdKeyList} from "../insert/insert";
+import inputOnlyNumber from "../../../../../utiles/fun/inputOnlyNumber";
 
 export default function Detail({info, onOpenFun, setAlert}) {
   const [data, setData] = useState({
     id: '',
     assNm: '',
+    assMainCd: '',
     assMainNm: '',
     assSubNm: '',
     buil: '',
@@ -20,6 +22,8 @@ export default function Detail({info, onOpenFun, setAlert}) {
     ip: '',
     ms: '',
     hwp: '',
+    eye: '',
+    pacs: '',
     useYn: '',
     memo: '',
   })
@@ -33,6 +37,10 @@ export default function Detail({info, onOpenFun, setAlert}) {
 
   const onInputData = (e) => {
     inputData(e, data, setData)
+  }
+
+  const onNumInputData = (e) => {
+    inputOnlyNumber(e, data, setData)
   }
 
   const updateAlert = () => {
@@ -190,10 +198,10 @@ export default function Detail({info, onOpenFun, setAlert}) {
                 </Label>
                 <Col md="10">
                   <Input
-                      placeholder="최대 10자"
+                      placeholder="최대 50자"
                       id="example-text-input"
                       type="text"
-                      maxLength={10}
+                      maxLength={100}
                       name={"place"}
                       defaultValue={data.place}
                       onChange={onInputData}
@@ -210,10 +218,10 @@ export default function Detail({info, onOpenFun, setAlert}) {
                 </Label>
                 <Col md="10">
                   <Input
-                      placeholder="최대 10자"
+                      placeholder="최대 50자"
                       id="example-text-input"
                       type="text"
-                      maxLength={10}
+                      maxLength={50}
                       name={"userNm"}
                       defaultValue={data.userNm }
                       onChange={onInputData}
@@ -262,50 +270,116 @@ export default function Detail({info, onOpenFun, setAlert}) {
                   />
                 </Col>
               </FormGroup>
-              <FormGroup className="row">
-                <Label
-                    className="form-control-label"
-                    htmlFor="example-text-input"
-                    md="1"
-                >
-                  MS_OFFICE
-                </Label>
-                <Col md="10">
-                  <Input type="select" name={"ms"} onChange={onInputData} value={data.ms || ''}>
-                    <option value=""></option>
-                    {
-                      cdList.code
-                          ? cdList.code.map((value, index) => {
-                            if (value.codeNm === 'MS')
-                              return <option key={index} value={value.optionNm}>{value.optionNm}</option>
-                          })
-                          : null
-                    }
-                  </Input>
-                </Col>
-              </FormGroup>
-              <FormGroup className="row">
-                <Label
-                    className="form-control-label"
-                    htmlFor="example-text-input"
-                    md="1"
-                >
-                  HWP
-                </Label>
-                <Col md="10">
-                  <Input type="select" name={"hwp"} onChange={onInputData} value={data.hwp || ''}>>
-                    <option value=""></option>
-                    {
-                      cdList.code
-                          ? cdList.code.map((value, index) => {
-                            if (value.codeNm === 'HWP')
-                              return <option key={index} value={value.optionNm}>{value.optionNm}</option>
-                          })
-                          : null
-                    }
-                  </Input>
-                </Col>
-              </FormGroup>
+              {
+                  data.assMainCd === 'PC'
+                  ? <>
+                        <FormGroup className="row">
+                          <Label
+                              className="form-control-label"
+                              htmlFor="example-text-input"
+                              md="1"
+                          >
+                            MS_OFFICE
+                          </Label>
+                          <Col md="10">
+                            <Input type="select" name={"ms"} onChange={onInputData} value={data.ms || ''}>
+                              <option value=""></option>
+                              {
+                                cdList.code
+                                    ? cdList.code.map((value, index) => {
+                                      if (value.codeNm === 'MS')
+                                        return <option key={index} value={value.optionNm}>{value.optionNm}</option>
+                                    })
+                                    : null
+                              }
+                            </Input>
+                          </Col>
+                        </FormGroup>
+                        <FormGroup className="row">
+                          <Label
+                              className="form-control-label"
+                              htmlFor="example-text-input"
+                              md="1"
+                          >
+                            HWP
+                          </Label>
+                          <Col md="10">
+                            <Input type="select" name={"hwp"} onChange={onInputData} value={data.hwp || ''}>>
+                              <option value=""></option>
+                              {
+                                cdList.code
+                                    ? cdList.code.map((value, index) => {
+                                      if (value.codeNm === 'HWP')
+                                        return <option key={index} value={value.optionNm}>{value.optionNm}</option>
+                                    })
+                                    : null
+                              }
+                            </Input>
+                          </Col>
+                        </FormGroup>
+                        <FormGroup className="row">
+                          <Label
+                              className="form-control-label"
+                              htmlFor="example-text-input"
+                              md="1"
+                          >
+                            Eye Reader
+                          </Label>
+                          <Col md="10">
+                            <Input
+                                placeholder="최대 3자"
+                                id="example-text-input"
+                                type="text"
+                                maxLength={3}
+                                name={"eye"}
+                                defaultValue={data.eye}
+                                onChange={onNumInputData}
+                            />
+                          </Col>
+                        </FormGroup>
+                        <FormGroup className="row">
+                          <Label
+                              className="form-control-label"
+                              htmlFor="example-text-input"
+                              md="1"
+                          >
+                            PACS
+                          </Label>
+                          <Col md="10" className="d-flex align-items-center">
+                            <div className="custom-control custom-radio mb-3 mr-3 mt-2">
+                              <input
+                                  className="custom-control-input"
+                                  id="pacs1"
+                                  name="pacs"
+                                  type="radio"
+                                  value="Y"
+                                  checked={data.pacs === 'Y'}
+                                  onChange={onInputData}
+                              />
+                              <label className="custom-control-label" htmlFor="pacs1">
+                                사용
+                              </label>
+                            </div>
+                            <div className="custom-control custom-radio mb-3 mr-3 mt-2">
+                              <input
+                                  className="custom-control-input"
+                                  id="pacs2"
+                                  name="pacs"
+                                  type="radio"
+                                  value=""
+                                  checked={data.pacs === ''}
+                                  onChange={onInputData}
+                              />
+                              <label className="custom-control-label" htmlFor="pacs2">
+                                미 사용
+                              </label>
+                            </div>
+                          </Col>
+                        </FormGroup>
+                    </>
+                  : null
+              }
+
               <FormGroup className="row">
                 <Label
                     className="form-control-label"

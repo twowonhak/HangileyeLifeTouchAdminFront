@@ -1,8 +1,9 @@
 import inputData from "../../../../../utiles/fun/inputData";
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label} from "reactstrap";
 import React, {useEffect, useState} from "react";
-import {cdKeyList, onSave} from "./insert";
+import {cdKeyList, onFirstSave, onSave} from "./insert";
 import {inputDateYearDefault} from "../../../../../utiles/fun/inputDateDefault";
+import inputOnlyNumber from "../../../../../utiles/fun/inputOnlyNumber";
 
 export default function Insert({info, onOpenFun, setAlert}) {
 
@@ -18,8 +19,10 @@ export default function Insert({info, onOpenFun, setAlert}) {
     ip: '',
     ms: '',
     hwp: '',
+    eye: '',
+    pacs: '',
   })
-  const [assData, setAssData] = useState([])
+
   const [cdList, setCdData] = useState({assetMain:[], assetSub:[], team:[], code: []})
 
   useEffect(()=>{
@@ -30,6 +33,10 @@ export default function Insert({info, onOpenFun, setAlert}) {
 
   const onInputData = (e) => {
     inputData(e, data, setData)
+  }
+
+  const onNumInputData = (e) => {
+    inputOnlyNumber(e, data, setData)
   }
 
   return (
@@ -165,10 +172,10 @@ export default function Insert({info, onOpenFun, setAlert}) {
                 </Label>
                 <Col md="10">
                   <Input
-                      placeholder="최대 10자"
+                      placeholder="최대 50자"
                       id="example-text-input"
                       type="text"
-                      maxLength={10}
+                      maxLength={100}
                       name={"place"}
                       onChange={onInputData}
                   />
@@ -184,10 +191,10 @@ export default function Insert({info, onOpenFun, setAlert}) {
                 </Label>
                 <Col md="10">
                   <Input
-                      placeholder="최대 10자"
+                      placeholder="최대 25자"
                       id="example-text-input"
                       type="text"
-                      maxLength={10}
+                      maxLength={50}
                       name={"userNm"}
                       onChange={onInputData}
                   />
@@ -232,46 +239,118 @@ export default function Insert({info, onOpenFun, setAlert}) {
                   />
                 </Col>
               </FormGroup>
-              <FormGroup className="row">
-                <Label
-                    className="form-control-label"
-                    htmlFor="example-text-input"
-                    md="1"
-                >
-                  MS_OFFICE
-                </Label>
-                <Col md="10">
-                  <Input type="select" name={"ms"} onChange={onInputData}>
-                    <option value=""></option>
-                    {
-                      cdList.code.map((value,index)=> {
-                        if (value.codeNm === 'MS')
-                          return <option key={index} value={value.optionNm}>{value.optionNm}</option>
-                      })
-                    }
-                  </Input>
-                </Col>
-              </FormGroup>
-              <FormGroup className="row">
-                <Label
-                    className="form-control-label"
-                    htmlFor="example-text-input"
-                    md="1"
-                >
-                  HWP
-                </Label>
-                <Col md="10">
-                  <Input type="select" name={"hwp"} onChange={onInputData}>
-                    <option value=""></option>
-                    {
-                      cdList.code.map((value,index)=> {
-                        if (value.codeNm === 'HWP')
-                          return <option key={index} value={value.optionNm}>{value.optionNm}</option>
-                      })
-                    }
-                  </Input>
-                </Col>
-              </FormGroup>
+              {
+                data.assMainCd === 'PC'
+                ? <>
+                      <FormGroup className="row">
+                        <Label
+                            className="form-control-label"
+                            htmlFor="example-text-input"
+                            md="1"
+                        >
+                          MS_OFFICE
+                        </Label>
+                        <Col md="10">
+                          <Input type="select" name={"ms"} onChange={onInputData}>
+                            <option value=""></option>
+                            {
+                              cdList.code.map((value,index)=> {
+                                if (value.codeNm === 'MS')
+                                  return <option key={index} value={value.optionNm}>{value.optionNm}</option>
+                              })
+                            }
+                          </Input>
+                        </Col>
+                      </FormGroup>
+                      <FormGroup className="row">
+                        <Label
+                            className="form-control-label"
+                            htmlFor="example-text-input"
+                            md="1"
+                        >
+                          HWP
+                        </Label>
+                        <Col md="10">
+                          <Input type="select" name={"hwp"} onChange={onInputData}>
+                            <option value=""></option>
+                            {
+                              cdList.code.map((value,index)=> {
+                                if (value.codeNm === 'HWP')
+                                  return <option key={index} value={value.optionNm}>{value.optionNm}</option>
+                              })
+                            }
+                          </Input>
+                        </Col>
+                      </FormGroup>
+                      <FormGroup className="row">
+                        <Label
+                            className="form-control-label"
+                            htmlFor="example-text-input"
+                            md="1"
+                        >
+                          Eye Reader
+                        </Label>
+                        <Col md="10">
+                          <Input
+                              placeholder="최대 3자"
+                              id="example-text-input"
+                              type="text"
+                              maxLength={3}
+                              name={"eye"}
+                              value={data.eye}
+                              onChange={onNumInputData}
+                          />
+                        </Col>
+                      </FormGroup>
+                      <FormGroup className="row">
+                        <Label
+                            className="form-control-label"
+                            htmlFor="example-text-input"
+                            md="1"
+                        >
+                          PACS
+                        </Label>
+                        <Col md="10" className="d-flex align-items-center">
+                          <div className="custom-control custom-radio mb-3 mr-3 mt-2">
+                            <input
+                                className="custom-control-input"
+                                id="pacs1"
+                                name="pacs"
+                                type="radio"
+                                value="Y"
+                                onChange={onInputData}
+                            />
+                            <label className="custom-control-label" htmlFor="pacs1">
+                              사용
+                            </label>
+                          </div>
+                          <div className="custom-control custom-radio mb-3 mr-3 mt-2">
+                            <input
+                                className="custom-control-input"
+                                id="pacs2"
+                                name="pacs"
+                                type="radio"
+                                value=""
+                                defaultChecked={true}
+                                onChange={onInputData}
+                            />
+                            <label className="custom-control-label" htmlFor="pacs2">
+                              미 사용
+                            </label>
+                          </div>
+                        </Col>
+                      </FormGroup>
+                    </>
+                : null
+              }
+
+              <Button
+                  color="default"
+                  type="button"
+                  onClick={() => onFirstSave(data, onOpenFun, setAlert, info)}
+              >
+                입고 or 안전재고 등록
+              </Button>
               <Button
                   color="primary"
                   type="button"

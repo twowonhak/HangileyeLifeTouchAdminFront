@@ -5,8 +5,8 @@ import React, {useEffect, useState} from "react";
 export function CodeList({codeInfo, setAlert, isOpenDetailListFun}){
 
   let [code, setCode] = useState({
-    lrgCode: [],
-    midCode: [],
+    lrgCtg: [],
+    midCtg: [],
   })
 
   useEffect(() => {
@@ -24,15 +24,15 @@ export function CodeList({codeInfo, setAlert, isOpenDetailListFun}){
         <CardBody>
           <Form>
             {
-              code.lrgCode.map((lrgValue, index) =>
+              code.lrgCtg.map((lrgValue, index) =>
                   <FormGroup className="row" key={index}>
                     <Label className="form-control-label" htmlFor="example-text-input"
                            md="1">{lrgValue.lrgCtgNm}</Label>
                     <Col md="10">
                       <div className="d-flex">
                         {
-                          code.midCode.map((midValue, index) => {
-                                if (lrgValue.lrgCtgCd === midValue.lrgCtgCd)
+                          code.midCtg.map((midValue, index) => {
+                                if (lrgValue.lrgCtgCd === midValue.lrgCtgCd && midValue.midCtgCd !== '00')
                                   return (
                                       <div className="custom-control mr-3 mt-2 align-items-center custom-mouseHover" key={index}>
                                         <Label onDoubleClick={() => codeDetail(midValue, codeInfo, isOpenDetailListFun)}>{midValue.midCtgNm}</Label>

@@ -1,9 +1,10 @@
 import {requestApi} from "../../../../../../api/mainApi";
 
 export function listSelect(setDataList){
-  requestApi("/question/queCode/ctgListSelectApi").then((res) => {
+  let reqData = {comm : 'Y'}
+  requestApi("/question/queCode/ctgListSelectApi", reqData).then((res) => {
     if (res.resultCode === "0000") {
-      setDataList(res.data.lagCtg)
+      setDataList(res.data.lrgCtg)
     } else {
       // alert(res.resultMessage)
     }

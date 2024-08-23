@@ -26,6 +26,8 @@ function AdminNavbar({theme, sidenavOpen, toggleSidenav}) {
   const [alert, setAlert] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies();
   const navigate = useNavigate();
+
+  // console.log(cookies)
   //
   useDidMountEffect(() => {
     if (cookies.ID === undefined) {

@@ -18,6 +18,7 @@ import AuthLayout from "views/layouts/Auth.js";
 import QuestionLayout from "views/layouts/Question.js";
 import StockLayout from "views/layouts/Stock.js";
 import Test from "./views/pages/test";
+import AuthorityLayout from "./views/layouts/Authority.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -27,11 +28,9 @@ root.render(
         <Route path="*" element={<Navigate to="/auth/login" replace/>}/>
         <Route path="/auth/*" element={<AuthLayout/>}/>
 
-        {/* 문지표 */}
         <Route path="/questionMain/*" element={<QuestionLayout/>}/>
-
-        {/* 재고관리 */}
         <Route path="/stockMain/*" element={<StockLayout/>}/>
+        <Route path="/authorityMain/*" element={<AuthorityLayout/>}/>
 
         <Route path="/admin/*" element={<AdminLayout/>}/>
         <Route path="/rtl/*" element={<RTLLayout/>}/>

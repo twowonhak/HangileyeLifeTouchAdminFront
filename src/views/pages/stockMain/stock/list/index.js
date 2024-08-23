@@ -67,12 +67,22 @@ export default function StockList({searchData, setSearchData,isOpenList, info, s
     },
     {
       dataField: "ms",
-      text: "오피스",
+      text: "MS_OFFICE",
       sort: true,
     },
     {
       dataField: "hwp",
-      text: "한글",
+      text: "HWP",
+      sort: true,
+    },
+    {
+      dataField: "eye",
+      text: "Eye_Reader",
+      sort: true,
+    },
+    {
+      dataField: "pacs",
+      text: "PACS",
       sort: true,
     },
   ]

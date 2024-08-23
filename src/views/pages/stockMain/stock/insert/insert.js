@@ -35,3 +35,16 @@ export function onSave(data, onOpenFun, setAlert, info) {
     console.error(e)
   })
 }
+
+export function onFirstSave(data, onOpenFun, setAlert, info) {
+  requestApi("/stock/stock/firstInsertApi", data).then((res) => {
+    if (res.resultCode === "0000") {
+      info.current = res.data
+      onOpenFun()
+    } else {
+      warning(setAlert, res.resultMessage)
+    }
+  }).catch((e) => {
+    console.error(e)
+  })
+}

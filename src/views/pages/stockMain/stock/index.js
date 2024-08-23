@@ -4,6 +4,7 @@ import {Container, Row} from "reactstrap";
 import Detail from "./detail";
 import Insert from "./insert";
 import StockList from "./list";
+import DisInsert from "./disposableInsert";
 
 export default function Stock() {
   const info = useRef('')
@@ -19,6 +20,7 @@ export default function Stock() {
 
   const [isOpenList, setIsOpenList] = useState(true);
   const [isOpenInsert, setIsOpenInsert] = useState(false);
+  const [isOpenDisInsert, setIsOpenDisInsert] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
   const [alert, setAlert] = useState(false);
   const menu = [
@@ -28,10 +30,15 @@ export default function Stock() {
       }
     },
     {
-      name: '등록', fun: () => {
+      name: '재고 등록', fun: () => {
         setIsOpenInsertFun()
       }
     },
+    // {
+    //   name: '소모품/라이센스 등록', fun: () => {
+    //     setIsOpenDisDetailFun()
+    //   }
+    // },
   ]
 
   function setIsOpenListFun() {
@@ -39,18 +46,28 @@ export default function Stock() {
     setIsOpenList(true)
     setIsOpenInsert(false)
     setIsOpenDetail(false)
+    setIsOpenDisInsert(false)
   }
 
   function setIsOpenInsertFun() {
     setIsOpenList(false)
     setIsOpenInsert(true)
     setIsOpenDetail(false)
+    setIsOpenDisInsert(false)
   }
 
   function setIsOpenDetailFun() {
     setIsOpenList(false)
     setIsOpenInsert(false)
     setIsOpenDetail(true)
+    setIsOpenDisInsert(false)
+  }
+
+  function setIsOpenDisDetailFun() {
+    setIsOpenList(false)
+    setIsOpenInsert(false)
+    setIsOpenDetail(false)
+    setIsOpenDisInsert(true)
   }
 
   return (
@@ -74,6 +91,11 @@ export default function Stock() {
                 isOpenDetail
                     ? <Detail info={info} onOpenFun={setIsOpenListFun} setAlert={setAlert}/>
                     : null
+              }
+              {
+                isOpenDisInsert
+                  ? <DisInsert info={info} onOpenFun={setIsOpenListFun} setAlert={setAlert}/>
+                  : null
               }
             </div>
           </Row>

@@ -6,7 +6,6 @@ export function detail(queInfo, setData, setAlert) {
   requestApi("/question/example/detailSelectApi", queInfo).then((res) => {
     if (res.resultCode === "0000") {
       setData(res.data)
-      console.log(res.data)
     } else {
       warning(setAlert, res.resultMessage)
     }

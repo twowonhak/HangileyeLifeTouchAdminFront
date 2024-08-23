@@ -2,10 +2,9 @@ import React from "react";
 import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 
-import routes from "../../router/stock";
-import Sidebar from "../../components/Sidebar/Sidebar";
+import routes from "../../router/authority";
 
-function StockLayout() {
+function AuthorityLayout() {
 
   const [sidenavOpen, setSidenavOpen] = React.useState(true);
   const location = useLocation();
@@ -20,7 +19,7 @@ function StockLayout() {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
-      if (prop.layout === "/stockMain") {
+      if (prop.layout === "/authorityMain") {
         return (
             <Route path={prop.path} element={prop.component} key={key} exact />
         );
@@ -57,16 +56,6 @@ function StockLayout() {
 
   return (
       <>
-        <Sidebar
-            routes={routes}
-            toggleSidenav={toggleSidenav}
-            sidenavOpen={sidenavOpen}
-            logo={{
-              // innerLink: "/",
-              imgSrc: require("assets/img/brand/로고_국문_가로_100.png"),
-              imgAlt: "...",
-            }}
-        />
         <div className="main-content" ref={mainContentRef}>
           <AdminNavbar
               theme={getNavbarTheme()}
@@ -78,7 +67,7 @@ function StockLayout() {
             {getRoutes(routes)}
             <Route
                 path="*"
-                element={<Navigate to="/stockMain/stats" replace />}
+                element={<Navigate to="/authorityMain/authority" replace />}
             />
           </Routes>
         </div>
@@ -90,4 +79,4 @@ function StockLayout() {
   );
 }
 
-export default StockLayout;
+export default AuthorityLayout;

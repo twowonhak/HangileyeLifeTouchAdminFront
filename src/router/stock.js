@@ -1,13 +1,14 @@
 import Stock from "../views/pages/stockMain/stock";
+import Stats from "../views/pages/stockMain/stats";
 
 const routes = [
-  // {
-  //   path: "/stats",
-  //   name: "통계",
-  //   icon: "ni ni-chart-bar-32 text-blue",
-  //   component: <Stats/>,
-  //   layout: "/stockMain",
-  // },
+  {
+    path: "/stats",
+    name: "재고파악",
+    icon: "ni ni-chart-bar-32 text-blue",
+    component: <Stats/>,
+    layout: "/stockMain",
+  },
   {
     path: "/stock",
     name: "재고",
@@ -15,6 +16,7 @@ const routes = [
     component: <Stock/>,
     layout: "/stockMain",
   },
+
   // {
   //   path: "/asset",
   //   name: "재고분류 코드",

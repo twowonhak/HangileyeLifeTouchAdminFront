@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AuthHeader from "../../../components/Headers/AuthHeader";
 import {Button, Card, CardBody, Col, Container, Row} from "reactstrap";
 import {Link} from "react-router-dom";
+import {mainMenuSelect} from "./mainMenu";
 
 export default function MainMenu() {
+
+  const [menuData, setMenuData] = useState([]);
+
+  useEffect(()=>{
+    mainMenuSelect(setMenuData)
+  },[])
 
   return (
       <>
@@ -19,20 +26,46 @@ export default function MainMenu() {
                   <div className="text-center text-muted mb-4">
                     <small>권한 필요 시 전산요청 사항을 작성 해주세요.</small>
                   </div>
-                  <div className="mb-4">
-                    <Link to="/questionMain">
-                      <Button block color="primary" size="lg" type="button">
-                        문진표
-                      </Button>
-                    </Link>
-                  </div>
-                  <div className="mb-4">
-                    <Link to="/stockMain">
-                      <Button block color="secondary" size="lg" type="button">
-                        재고 관리
-                      </Button>
-                    </Link>
-                  </div>
+
+                  {
+                    menuData.map((value, index) => {
+                          if (index % 2 === 0) {
+                            return (<div className="mb-4" key={index}>
+                              <Link to={value.link}>
+                                <Button block color="primary" size="lg" type="button">
+                                  {value.menuNm}
+                                </Button>
+                              </Link>
+                            </div>)
+                          }
+
+                          if (index % 2 === 1) {
+                            return (<div className="mb-4" key={index}>
+                              <Link to={value.link}>
+                                <Button block color="secondary" size="lg" type="button">
+                                  {value.menuNm}
+                                </Button>
+                              </Link>
+                            </div>)
+                          }
+                        }
+                    )
+                  }
+
+                  {/*<div className="mb-4">*/}
+                  {/*  <Link to="/questionMain">*/}
+                  {/*    <Button block color="primary" size="lg" type="button">*/}
+                  {/*      문진표*/}
+                  {/*    </Button>*/}
+                  {/*  </Link>*/}
+                  {/*</div>*/}
+                  {/*<div className="mb-4">*/}
+                  {/*  <Link to="/stockMain">*/}
+                  {/*    <Button block color="secondary" size="lg" type="button">*/}
+                  {/*      재고 관리*/}
+                  {/*    </Button>*/}
+                  {/*  </Link>*/}
+                  {/*</div>*/}
                 </CardBody>
               </Card>
             </Col>

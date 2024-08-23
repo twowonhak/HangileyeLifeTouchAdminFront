@@ -5,15 +5,15 @@ import {useNavigate} from "react-router-dom";
 import inputData from "../utiles/fun/inputData";
 import {useCookies} from "react-cookie";
 import AuthHeader from "../components/Headers/AuthHeader";
-import {login} from "./login";
+import {login, mainMenuSelect} from "./login";
 
 export default function Login() {
 
-  // todo: defult 값 제거 하기
   const [loginData, setLoginData] = useState({
-    "id": "221211",
-    "pw": "221211",
+    "id": "",
+    "pw": "",
   });
+
   const navigate = useNavigate();
 
   const [cookies, setCookie, removeCookie] = useCookies();
