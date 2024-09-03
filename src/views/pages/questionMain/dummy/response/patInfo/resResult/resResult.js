@@ -2,10 +2,10 @@ import {requestApi} from "../../../../../../../api/mainApi";
 import warning from "../../../../../components/Alert/SweetAlert/warning";
 
 export function responseList(app, setAlert, setDataList) {
-  requestApi("/response/responseResultListSelectApi", app).then((res) => {
+  app.current.app.chartNo = app.current.chartNo
+  requestApi("/response/responseResultListSelectApi", app.current.app).then((res) => {
     if (res.resultCode === "0000") {
       setDataList(res.data)
-
     } else {
       warning(setAlert, res.resultMessage)
     }

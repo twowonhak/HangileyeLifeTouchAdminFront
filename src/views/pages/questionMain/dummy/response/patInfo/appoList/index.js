@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {Button, Card, CardHeader} from "reactstrap";
-import {appointmentList, questionCheck} from "./list";
+import {Card, CardHeader} from "reactstrap";
+import {appointmentList} from "./list";
 import {paging} from "../../../../../components/pagination";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
@@ -20,17 +20,18 @@ export default function AppoList({chartNo, setAlert, setIsOpenResResult}) {
   const columns = [
     {
       dataField: "seq",
-      text: "번호",
       sort: true,
+      text: "번호",
+      hidden: true,
     },
     {
       dataField: "appDatDy",
-      text: "예약일자",
+      text: "예약+방문 일자",
       sort: true,
     },
     {
-      dataField: "appTime",
-      text: "예약시간",
+      dataField: "recvTm",
+      text: "예약+방문 시간",
       sort: true,
     },
     {
@@ -44,13 +45,8 @@ export default function AppoList({chartNo, setAlert, setIsOpenResResult}) {
       sort: true,
     },
     {
-      dataField: "appoNm",
-      text: "예약구분",
-      sort: true,
-    },
-    {
-      dataField: "vistYn",
-      text: "방문여부",
+      dataField: "type",
+      text: "방문정보",
       sort: true,
     },
     {
@@ -95,10 +91,10 @@ export default function AppoList({chartNo, setAlert, setIsOpenResResult}) {
       <>
         <Card>
           <CardHeader>
-            <h3 className="mb-0">예약 정보</h3>
+            <h3 className="mb-0">예약 + 방문 정보</h3>
             <div className="d-flex justify-content-between">
               <p className="text-sm mb-0">
-               예약일에 작성 된 문진 내용을 확인 할 수 있습니다.
+              예약 환자 접수 시 예약시간->접수시간, 방문정보->방문으로 변경
               </p>
             </div>
           </CardHeader>

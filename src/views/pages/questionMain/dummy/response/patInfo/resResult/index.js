@@ -5,8 +5,6 @@ import {responseList} from "./resResult";
 
 export default function ResResult({chartNo, setAlert, setIsOpenSearchFun, setIsOpenResResult}) {
 
-  console.log(chartNo.current)
-
   const [dataList, setDataList] = useState([{
     appDat: '',
     diagNm: '',
@@ -14,7 +12,7 @@ export default function ResResult({chartNo, setAlert, setIsOpenSearchFun, setIsO
     queTxt: '',
     patCase: '',
     exaTxt: '',
-    exatype: '',
+    exaType: '',
     resTxt: '',
     diviceTy: '',
     osNm: '',
@@ -24,7 +22,7 @@ export default function ResResult({chartNo, setAlert, setIsOpenSearchFun, setIsO
   }])
 
   useEffect(() => {
-    responseList(chartNo.current.app, setAlert, setDataList)
+    responseList(chartNo, setAlert, setDataList)
   }, [])
 
   const menu = [
@@ -54,52 +52,30 @@ export default function ResResult({chartNo, setAlert, setIsOpenSearchFun, setIsO
                   </p>
                 </CardHeader>
                 <CardBody>
-                  <Row className="py-3 align-items-center">
-                    {
-                      dataList.map((value, index) =>
-                          <>
-                            <Col sm="2">
-                              <small className="text-uppercase text-muted font-weight-bold">
-                                {value.queTxt}
-                              </small>
-                            </Col>
-                            <Col sm="9">
-                              <h3 className="heading mb-0">
-                                {
-                                  value.exatype === 'T'
-                                      ? value.exaTxt + ' (Free) : ' + value.resTxt
-                                      : value.exaTxt
-                                }
-                              </h3>
-                            </Col>
-                          </>)
-                    }
-                  </Row>
+                  {
+                    dataList.map((value, index) =>
+                        <Row className="py-3 align-items-center" key={index}>
+                          <Col sm="3">
+                            <small className="text-uppercase text-muted font-weight-bold">
+                              {value.queTxt}
+                            </small>
+                          </Col>
+                          <Col sm="9">
+                            <h3 className="heading mb-0">
+                              {
+                                value.exaType === 'T'
+                                    ? value.exaTxt + ' (Free) : ' + value.resTxt
+                                    : value.exaTxt
+                              }
+                            </h3>
+                          </Col>
+                        </Row>)
+                  }
                 </CardBody>
               </Card>
               <Card>
                 <CardBody>
                   <Row className="py-3 align-items-center">
-                    <Col sm="2">
-                      <small className="text-uppercase text-muted font-weight-bold">
-                        환자케이스
-                      </small>
-                    </Col>
-                    <Col sm="9">
-                      <h3 className="heading mb-0">
-                        {dataList[0].patCase}
-                      </h3>
-                    </Col>
-                    <Col sm="2">
-                      <small className="text-uppercase text-muted font-weight-bold">
-                        진료구분
-                      </small>
-                    </Col>
-                    <Col sm="9">
-                      <h3 className="heading mb-0">
-                        {dataList[0].appoNm}
-                      </h3>
-                    </Col>
                     <Col sm="2">
                       <small className="text-uppercase text-muted font-weight-bold">
                         진료과
@@ -118,36 +94,6 @@ export default function ResResult({chartNo, setAlert, setIsOpenSearchFun, setIsO
                     <Col sm="9">
                       <h3 className="heading mb-0">
                         {dataList[0].doctNm}
-                      </h3>
-                    </Col>
-                    <Col sm="2">
-                      <small className="text-uppercase text-muted font-weight-bold">
-                        작성 디바이스
-                      </small>
-                    </Col>
-                    <Col sm="9">
-                      <h3 className="heading mb-0">
-                        {dataList[0].diviceTy}
-                      </h3>
-                    </Col>
-                    <Col sm="2">
-                      <small className="text-uppercase text-muted font-weight-bold">
-                        작성 운영체제
-                      </small>
-                    </Col>
-                    <Col sm="9">
-                      <h3 className="heading mb-0">
-                        {dataList[0].osNm}
-                      </h3>
-                    </Col>
-                    <Col sm="2">
-                      <small className="text-uppercase text-muted font-weight-bold">
-                        작성 브라우저
-                      </small>
-                    </Col>
-                    <Col sm="9">
-                      <h3 className="heading mb-0">
-                        {dataList[0].browserNm}
                       </h3>
                     </Col>
                     <Col sm="2">

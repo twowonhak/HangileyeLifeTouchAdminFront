@@ -14,9 +14,6 @@ export default function inputOnlyNumber(e, data, setData) {
   // 맨앞에 '0' 제거 ( 숫자 입력 시 첫 자리가 '0' 못오게 제거)
   num = num.replace(/(^0+)/, "");
 
-  console.log(num)
-  console.log(name)
-
   setData({
     ...data,
     [name]: num
