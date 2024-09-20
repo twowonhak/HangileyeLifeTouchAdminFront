@@ -2,6 +2,7 @@ import ResponseList from "../views/pages/questionMain/dummy/response";
 import Large from "../views/pages/questionMain/code/large";
 import Question from "../views/pages/questionMain/question"
 import Result from "../views/pages/questionMain/result";
+import Stats from "../views/pages/questionMain/dummy/response/stats";
 
 const routes = [
   {
@@ -27,9 +28,16 @@ const routes = [
   },
   {
     path: "/response",
-    name: "환자 답변 조회",
+    name: "환자 문진 답변",
     icon: "ni ni-notification-70 text-pink",
     component: <ResponseList />,
+    layout: "/questionMain",
+  },
+  {
+    path: "/stats",
+    name: "문진 결과 통계",
+    icon: "ni ni-credit-card text-black",
+    component: <Stats />,
     layout: "/questionMain",
   },
 

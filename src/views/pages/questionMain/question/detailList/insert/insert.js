@@ -10,11 +10,15 @@ export function onSave(data, setAlert, isOpenListFun) {
   if (data.useEndDat === '' || data.useEndDat === undefined) {
     data.useEndDat = '99999999'
   }
+  if (data.mulYn === '' || data.mulYn === undefined) {
+    data.mulYn = 'N'
+  }
 
   let ok = true
   if (data.queTxt === '' || data.queTxt === undefined) {
     ok = false
   }
+
 
   if (ok) {
     requestApi("/question/question/insertApi", data).then((res) => {

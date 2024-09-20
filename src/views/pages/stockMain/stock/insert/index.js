@@ -19,7 +19,8 @@ export default function Insert({info, onOpenFun, setAlert}) {
     ip: '',
     ms: '',
     hwp: '',
-    eye: '',
+    eyeExa: '',
+    eyeCli: '',
     pacs: '',
   })
 
@@ -288,7 +289,7 @@ export default function Insert({info, onOpenFun, setAlert}) {
                             htmlFor="example-text-input"
                             md="1"
                         >
-                          Eye Reader
+                          Eye Reader_검사
                         </Label>
                         <Col md="10">
                           <Input
@@ -296,8 +297,28 @@ export default function Insert({info, onOpenFun, setAlert}) {
                               id="example-text-input"
                               type="text"
                               maxLength={3}
-                              name={"eye"}
-                              value={data.eye}
+                              name={"eyeExa"}
+                              value={data.eyeExa}
+                              onChange={onNumInputData}
+                          />
+                        </Col>
+                      </FormGroup>
+                      <FormGroup className="row">
+                        <Label
+                            className="form-control-label"
+                            htmlFor="example-text-input"
+                            md="1"
+                        >
+                          Eye Reader_진료
+                        </Label>
+                        <Col md="10">
+                          <Input
+                              placeholder="최대 3자"
+                              id="example-text-input"
+                              type="text"
+                              maxLength={3}
+                              name={"eyeCli"}
+                              value={data.eyeCli}
                               onChange={onNumInputData}
                           />
                         </Col>

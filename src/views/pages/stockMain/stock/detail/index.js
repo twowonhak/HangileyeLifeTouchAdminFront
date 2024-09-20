@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import inputData from "../../../../../utiles/fun/inputData";
 import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label} from "reactstrap";
-import {detail, onUpdate, onDelete, onClear, onUse} from "./detail";
+import {detail, onUpdate, onDelete, onClear, onUse, onWait} from "./detail";
 import NotificationAlert from "../../../components/Alert/Modals/Notification";
 import {cdKeyList} from "../insert/insert";
 import inputOnlyNumber from "../../../../../utiles/fun/inputOnlyNumber";
@@ -51,7 +51,13 @@ export default function Detail({info, onOpenFun, setAlert}) {
 
   const deleteAlert = () => {
     setAlert(
-        <NotificationAlert type={"danger"} setIsModalOpen={setAlert} title={"삭제"} contents={"해당 정보를 삭제 하시겠습니까?"} onClickFun={() => onDelete(data, setAlert, onOpenFun)}/>
+        <NotificationAlert type={"danger"} setIsModalOpen={setAlert} title={"삭제"} contents={"해당 정보를 폐기 완료로 변경 하시겠습니까?"} onClickFun={() => onDelete(data, setAlert, onOpenFun)}/>
+    )
+  };
+
+  const waitAlert = () => {
+    setAlert(
+        <NotificationAlert type={"danger"} setIsModalOpen={setAlert} title={"삭제"} contents={"해당 정보를 폐기 대기로 변경 하겠습니까?"} onClickFun={() => onWait(data, setAlert, onOpenFun)}/>
     )
   };
 
@@ -323,7 +329,7 @@ export default function Detail({info, onOpenFun, setAlert}) {
                               htmlFor="example-text-input"
                               md="1"
                           >
-                            Eye Reader
+                            Eye Reader_검사
                           </Label>
                           <Col md="10">
                             <Input
@@ -331,8 +337,28 @@ export default function Detail({info, onOpenFun, setAlert}) {
                                 id="example-text-input"
                                 type="text"
                                 maxLength={3}
-                                name={"eye"}
-                                defaultValue={data.eye}
+                                name={"eyeExa"}
+                                defaultValue={data.eyeExa}
+                                onChange={onNumInputData}
+                            />
+                          </Col>
+                        </FormGroup>
+                        <FormGroup className="row">
+                          <Label
+                              className="form-control-label"
+                              htmlFor="example-text-input"
+                              md="1"
+                          >
+                            Eye Reader_진료
+                          </Label>
+                          <Col md="10">
+                            <Input
+                                placeholder="최대 3자"
+                                id="example-text-input"
+                                type="text"
+                                maxLength={3}
+                                name={"eyeCli"}
+                                defaultValue={data.eyeCli}
                                 onChange={onNumInputData}
                             />
                           </Col>
@@ -393,7 +419,8 @@ export default function Detail({info, onOpenFun, setAlert}) {
                     {{
                       'Y': '사용중',
                       'N': '미사용',
-                      'D': '폐기'
+                      'W': '폐기 대기',
+                      'D': '폐기 완료'
                     }[data.useYn] || null}
                   </h3>
                 </Col>
@@ -438,9 +465,9 @@ export default function Detail({info, onOpenFun, setAlert}) {
                   <Button
                       color="danger"
                       type="button"
-                      onClick={deleteAlert}
+                      onClick={waitAlert}
                   >
-                    폐기
+                    폐기 대기
                   </Button>
                 </>,
                 'N': <>
@@ -454,9 +481,25 @@ export default function Detail({info, onOpenFun, setAlert}) {
                   <Button
                       color="danger"
                       type="button"
+                      onClick={waitAlert}
+                  >
+                    폐기 대기
+                  </Button>
+                </>,
+                'W': <>
+                  <Button
+                      color="success"
+                      type="button"
+                      onClick={useAlert}
+                  >
+                    사용
+                  </Button>
+                  <Button
+                      color="danger"
+                      type="button"
                       onClick={deleteAlert}
                   >
-                    폐기
+                    폐기 완료
                   </Button>
                 </>,
                 'D': null

@@ -12,3 +12,7 @@ import customAxios from "../lib/customAxios";
 export const requestApi = async (url, infoData) => {
   return await customAxios.post(url, infoData)
 }
+
+export const requestExcelDownloadApi = async (url, infoData) => {
+  return await customAxios.excelDownload(url, infoData)
+}

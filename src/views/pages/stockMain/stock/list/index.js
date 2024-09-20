@@ -76,8 +76,13 @@ export default function StockList({searchData, setSearchData,isOpenList, info, s
       sort: true,
     },
     {
-      dataField: "eye",
-      text: "Eye_Reader",
+      dataField: "eyeExa",
+      text: "Eye_Reader_검사",
+      sort: true,
+    },
+    {
+      dataField: "eyeCli",
+      text: "Eye_Reader_진료",
       sort: true,
     },
     {
@@ -180,7 +185,8 @@ export default function StockList({searchData, setSearchData,isOpenList, info, s
               <option value={""}></option>
               <option value={"Y"}>사용</option>
               <option value={"N"}>미사용</option>
-              <option value={"D"}>폐기</option>
+              <option value={"W"}>폐기 대기</option>
+              <option value={"D"}>폐기 완료</option>
             </select>
           </label>
           <button type="button" className="btn btn-outline-primary btn-sm" onClick={clear}>초기화</button>

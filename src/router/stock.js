@@ -1,5 +1,6 @@
 import Stock from "../views/pages/stockMain/stock";
 import Stats from "../views/pages/stockMain/stats";
+import State from "../views/pages/stockMain/state";
 
 const routes = [
   {
@@ -14,6 +15,13 @@ const routes = [
     name: "재고",
     icon: "ni ni-box-2 text-black",
     component: <Stock/>,
+    layout: "/stockMain",
+  },
+  {
+    path: "/state",
+    name: "상태",
+    icon: "ni ni-single-02 text-pink",
+    component: <State/>,
     layout: "/stockMain",
   },
 

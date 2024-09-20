@@ -28,9 +28,9 @@ const axiosUtil = Object.freeze({
   post: (url, param = {}) => {
     console.log('* url ===> ', url)
     console.log('* param ===> ', param)
-    param.diviceTy = deviceType
-    param.osNm = osName
-    param.browserNm = browserName
+    // param.diviceTy = deviceType
+    // param.osNm = osName
+    // param.browserNm = browserName
     return axiosInstance
         .post(url,
             param,
@@ -61,6 +61,32 @@ const axiosUtil = Object.freeze({
           console.error(error)
         })
   },
+
+  excelDownload: (url, param) => {
+    return axiosInstance
+        .post(url, param, {
+          // params: param,
+          withCredentials: true,
+          responseType: "blob"
+        }).then(res => {
+          const url = window.URL.createObjectURL(
+              new Blob([res.data], {type: res.headers['content-type']})
+          );
+          const link = document.createElement("a");
+          const filename = decodeURIComponent(res.headers['content-disposition'])
+          if (filename !== "undefined") {
+            link.href = url;
+            link.setAttribute(
+                "download",
+                filename
+            );
+            document.body.appendChild(link);
+            link.click();
+          } else {
+            return null
+          }
+        })
+  }
 });
 
 export default axiosUtil;

@@ -75,6 +75,11 @@ export default function DetailList({codeInfo, setAlert}) {
       sort: true,
     },
     {
+      dataField: "mulYn",
+      text: "다중선택",
+      sort: true,
+    },
+    {
       dataField: "useStrDat",
       text: "적용기간_시작",
       sort: true,

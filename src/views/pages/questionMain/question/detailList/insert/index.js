@@ -51,6 +51,50 @@ export default function Insert({info, codeInfo, setAlert, SubMenu, isOpenListFun
               <FormGroup className="row">
                 <Label
                     className="form-control-label"
+                    htmlFor="example-text-input"
+                    md="1"
+                >
+                  답변 선택
+                </Label>
+                <Col md="10" className="d-flex align-items-center">
+                  <div className="custom-control custom-radio mb-3 mr-3 mt-2">
+                    <input
+                        className="custom-control-input"
+                        id="customRadioC"
+                        name="type"
+                        type="mulYn"
+                        value="N"
+                        defaultChecked={true}
+                        onChange={onInputData}
+                    />
+                    <label
+                        className="custom-control-label"
+                        htmlFor="customRadioC"
+                    >
+                      단일
+                    </label>
+                  </div>
+                  <div className="custom-control custom-radio mb-3 mr-3 mt-2">
+                    <input
+                        className="custom-control-input"
+                        id="customRadioT"
+                        name="mulYn"
+                        type="radio"
+                        value="Y"
+                        onChange={onInputData}
+                    />
+                    <label
+                        className="custom-control-label"
+                        htmlFor="customRadioT"
+                    >
+                      다중
+                    </label>
+                  </div>
+                </Col>
+              </FormGroup>
+              <FormGroup className="row">
+                <Label
+                    className="form-control-label"
                     htmlFor="example-date-input"
                     md="1"
                 >

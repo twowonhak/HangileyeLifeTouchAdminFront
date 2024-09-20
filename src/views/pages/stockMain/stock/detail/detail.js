@@ -28,9 +28,23 @@ export function onUpdate(data, setAlert) {
 }
 
 export function onDelete(data, setAlert, onOpenFun) {
+  data.useYn = "D"
   requestApi("/stock/stock/deleteApi", data).then((res) => {
     if (res.resultCode === "0000") {
-      success(setAlert, "삭제 완료 되었습니다.", onOpenFun)
+      success(setAlert, "폐기 완료 되었습니다.", onOpenFun)
+    } else {
+      warning(setAlert, res.resultMessage)
+    }
+  }).catch((e) => {
+    console.error(e)
+  })
+}
+
+export function onWait(data, setAlert, onOpenFun) {
+  data.useYn = "W"
+  requestApi("/stock/stock/deleteApi", data).then((res) => {
+    if (res.resultCode === "0000") {
+      success(setAlert, "폐기 대기 되었습니다.", onOpenFun)
     } else {
       warning(setAlert, res.resultMessage)
     }

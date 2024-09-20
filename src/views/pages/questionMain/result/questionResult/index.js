@@ -13,7 +13,6 @@ export default function QuestionResult({codeInfo, setAlert}) {
     select(codeInfo, setAlert, setDataList)
   }, [])
 
-  console.log(dataList)
 
   return (
       <>
@@ -21,7 +20,7 @@ export default function QuestionResult({codeInfo, setAlert}) {
           dataList.queList.map((queValue, index) =>
               <Card key={index}>
                 <CardHeader>
-                  <h3 className="mb-0">{index + 1}. {queValue.queTxt}</h3>
+                  <h3 className="mb-0">{index + 1}. {queValue.queTxt}  ({queValue.mulYn})</h3>
                   <span>{queValue.lrgCtgNm} > {queValue.midCtgNm}</span>
                 </CardHeader>
                 <CardBody>

@@ -76,8 +76,8 @@ export default function Detail({info, setAlert, SubMenu, isOpenListFun}){
               >
                 보기 타입
               </Label>
-              <Col md="10">
-                <div className="custom-control custom-radio mb-3">
+              <Col md="10" className="d-flex align-items-center">
+                <div className="custom-control custom-radio mb-3 mr-3 mt-2">
                   <input
                       className="custom-control-input"
                       id="customRadioC"
@@ -94,7 +94,7 @@ export default function Detail({info, setAlert, SubMenu, isOpenListFun}){
                     체크박스
                   </label>
                 </div>
-                <div className="custom-control custom-radio mb-3">
+                <div className="custom-control custom-radio mb-3 mr-3 mt-2">
                   <input
                       className="custom-control-input"
                       id="customRadioT"
